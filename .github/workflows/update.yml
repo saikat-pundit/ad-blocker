@@ -47,6 +47,52 @@ jobs:
         
         echo "=== social.txt ===" >> blocklist.txt
         curl -s "https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/adblock/social.txt" >> blocklist.txt
+        echo "" >> blocklist.txt
+        
+        # === GOOGLE BLOCKLISTS ===
+        echo "=== analyticsparsed (Google Analytics) ===" >> blocklist.txt
+        curl -s "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/analyticsparsed" >> blocklist.txt
+        echo "" >> blocklist.txt
+        
+        echo "=== doubleclickparsed (Google Ads) ===" >> blocklist.txt
+        curl -s "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/doubleclickparsed" >> blocklist.txt
+        echo "" >> blocklist.txt
+        
+        echo "=== dnsparsed (Google DNS) ===" >> blocklist.txt
+        curl -s "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/dnsparsed" >> blocklist.txt
+        echo "" >> blocklist.txt
+        
+        echo "=== proxiesparsed (Google Proxies) ===" >> blocklist.txt
+        curl -s "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/proxiesparsed" >> blocklist.txt
+        echo "" >> blocklist.txt
+        
+        echo "=== shortlinksparsed (goo.gl links) ===" >> blocklist.txt
+        curl -s "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/shortlinksparsed" >> blocklist.txt
+        echo "" >> blocklist.txt
+        
+        echo "=== fontsparsed (Google Fonts) ===" >> blocklist.txt
+        curl -s "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/fontsparsed" >> blocklist.txt
+        echo "" >> blocklist.txt
+        
+        echo "=== productsparsed (Google Shopping) ===" >> blocklist.txt
+        curl -s "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/productsparsed" >> blocklist.txt
+        echo "" >> blocklist.txt
+        
+        echo "=== androidparsed (Android/Play Store) ===" >> blocklist.txt
+        curl -s "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/androidparsed" >> blocklist.txt
+        echo "" >> blocklist.txt
+        
+        echo "=== fiberparsed (Google Fiber) ===" >> blocklist.txt
+        curl -s "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/fiberparsed" >> blocklist.txt
+        echo "" >> blocklist.txt
+        
+        # === ADDITIONAL LISTS ===
+        echo "=== native.oppo-realme.txt ===" >> blocklist.txt
+        curl -s "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/native.oppo-realme.txt" >> blocklist.txt
+        echo "" >> blocklist.txt
+        
+        echo "=== Microsoft All (corporate) ===" >> blocklist.txt
+        curl -s "https://raw.githubusercontent.com/jmdugan/blocklists/master/corporations/microsoft/all" >> blocklist.txt
         
         echo "✅ Created blocklist.txt with all content in order"
         
