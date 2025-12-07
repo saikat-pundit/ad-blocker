@@ -89,6 +89,10 @@ jobs:
         echo "=== Firebase (Google Firebase) ===" >> blocklist.txt
         curl -s "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/firebaseparsed" >> blocklist.txt
         echo "" >> blocklist.txt
+
+        echo "=== General (Google General) ===" >> blocklist.txt
+        curl -s "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/generalparsed" >> blocklist.txt
+        echo "" >> blocklist.txt
         
         # === ADDITIONAL LISTS ===
         echo "=== native.oppo-realme.txt ===" >> blocklist.txt
