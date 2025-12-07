@@ -15,22 +15,38 @@ jobs:
       
     - name: Create Blocklist
       run: |
-        # Download and combine ALL lists
-        curl -s "https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/adblock/doh-vpn-proxy-bypass.txt" > combined.txt
-        curl -s "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/tif.txt" >> combined.txt
-        curl -s "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/ultimate.txt" >> combined.txt
-        curl -s "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/spam-tlds.txt" >> combined.txt
-        curl -s "https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/adblock/dyndns.txt" >> combined.txt
-        curl -s "https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/adguard/dns-rebind-protection.txt" >> combined.txt
-        curl -s "https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/adblock/social.txt" >> combined.txt
+        # Create fresh file
+        > blocklist.txt
         
-        # Clean up: keep only domains (removed comment cleaning)
-        sed 's/^||//; s/\^.*$//; s/^0\.0\.0\.0 //; s/^127\.0\.0\.1 //' combined.txt | \
-        sort -u > blocklist.txt
+        # Download and paste each link IN ORDER
+        echo "=== doh-vpn-proxy-bypass.txt ===" >> blocklist.txt
+        curl -s "https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/adblock/doh-vpn-proxy-bypass.txt" >> blocklist.txt
+        echo "" >> blocklist.txt
         
-        # Count and show
-        COUNT=$(wc -l < blocklist.txt)
-        echo "✅ Created blocklist.txt with $COUNT domains"
+        echo "=== tif.txt ===" >> blocklist.txt
+        curl -s "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/tif.txt" >> blocklist.txt
+        echo "" >> blocklist.txt
+        
+        echo "=== ultimate.txt ===" >> blocklist.txt
+        curl -s "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/ultimate.txt" >> blocklist.txt
+        echo "" >> blocklist.txt
+        
+        echo "=== spam-tlds.txt ===" >> blocklist.txt
+        curl -s "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/spam-tlds.txt" >> blocklist.txt
+        echo "" >> blocklist.txt
+        
+        echo "=== dyndns.txt ===" >> blocklist.txt
+        curl -s "https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/adblock/dyndns.txt" >> blocklist.txt
+        echo "" >> blocklist.txt
+        
+        echo "=== dns-rebind-protection.txt ===" >> blocklist.txt
+        curl -s "https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/adguard/dns-rebind-protection.txt" >> blocklist.txt
+        echo "" >> blocklist.txt
+        
+        echo "=== social.txt ===" >> blocklist.txt
+        curl -s "https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/adblock/social.txt" >> blocklist.txt
+        
+        echo "✅ Created blocklist.txt with all content in order"
         
     - name: Commit Changes
       run: |
