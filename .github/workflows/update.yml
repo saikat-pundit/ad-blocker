@@ -85,6 +85,10 @@ jobs:
         echo "=== fiberparsed (Google Fiber) ===" >> blocklist.txt
         curl -s "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/fiberparsed" >> blocklist.txt
         echo "" >> blocklist.txt
+
+        echo "=== Firebase (Google Firebase) ===" >> blocklist.txt
+        curl -s "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/firebaseparsed" >> blocklist.txt
+        echo "" >> blocklist.txt
         
         # === ADDITIONAL LISTS ===
         echo "=== native.oppo-realme.txt ===" >> blocklist.txt
