@@ -21,6 +21,8 @@ jobs:
         curl -s "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/ultimate.txt" >> combined.txt
         curl -s "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/spam-tlds.txt" >> combined.txt
         curl -s "https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/adblock/dyndns.txt" >> combined.txt
+        curl -s "https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/adguard/dns-rebind-protection.txt" >> combined.txt
+        curl -s "https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/adblock/social.txt" >> combined.txt
         
         # Clean up: keep only domains (removed comment cleaning)
         sed 's/^||//; s/\^.*$//; s/^0\.0\.0\.0 //; s/^127\.0\.0\.1 //' combined.txt | \
