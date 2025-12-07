@@ -1,0 +1,51 @@
+name: Update DNS Blocklist
+on:
+  schedule:
+    - cron: '0 12 * * *'  # Daily at 12 PM UTC
+  workflow_dispatch:       # Manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      
+    - name: Merge all blocklists
+      run: |
+        # Download all lists
+        curl -s "https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/adblock/doh-vpn-proxy-bypass.txt" -o list1.txt
+        curl -s "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/tif.txt" -o list2.txt
+        curl -s "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/ultimate.txt" -o list3.txt
+        curl -s "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/spam-tlds.txt" -o list4.txt
+        curl -s "https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/adblock/dyndns.txt" -o list5.txt
+        
+        # Combine, clean, sort
+        cat list*.txt | grep -v '^!' | grep -v '^#' | grep -v '^$' | sed 's/^||//; s/\^.*$//' | sort -u > all-domains.txt
+        
+        # Count domains
+        DOMAIN_COUNT=$(wc -l < all-domains.txt)
+        echo "Total domains: $DOMAIN_COUNT"
+        
+        # Create final file with header
+        echo "# Auto-updated DNS Blocklist" > blocklist.txt
+        echo "# Generated: $(date)" >> blocklist.txt
+        echo "# Sources:" >> blocklist.txt
+        echo "# 1. doh-vpn-proxy-bypass.txt" >> blocklist.txt
+        echo "# 2. tif.txt" >> blocklist.txt
+        echo "# 3. ultimate.txt" >> blocklist.txt
+        echo "# 4. spam-tlds.txt" >> blocklist.txt
+        echo "# 5. dyndns.txt" >> blocklist.txt
+        echo "# Total domains: $DOMAIN_COUNT" >> blocklist.txt
+        echo "" >> blocklist.txt
+        cat all-domains.txt >> blocklist.txt
+        
+    - name: Upload blocklist
+      uses: actions/upload-artifact@v3
+      with:
+        name: dns-blocklist
+        path: blocklist.txt
