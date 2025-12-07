@@ -4,13 +4,18 @@ on:
     - cron: '0 0 * * *'  # Daily at midnight
   workflow_dispatch:      # Manual run button
 
+permissions:
+  contents: write  # This gives permission to push
+
 jobs:
   update:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
-      
+      with:
+        token: ${{ secrets.GH_TOKEN }}
+        
     - name: Download and merge blocklists
       run: |
         # Create new file with header
@@ -43,8 +48,8 @@ jobs:
         
     - name: Commit and push
       run: |
-        git config --global user.email "github-actions@github.com"
-        git config --global user.name "GitHub Actions"
+        git config user.email "github-actions@github.com"
+        git config user.name "GitHub Actions"
         git add merged-dns-blocklist.txt
         git commit -m "Auto-update: $(date)" || echo "No changes"
         git push
