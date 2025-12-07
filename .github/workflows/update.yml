@@ -4,9 +4,6 @@ on:
     - cron: '0 0 * * *'  # Daily at midnight
   workflow_dispatch:      # Manual run button
 
-permissions:
-  contents: write  # This gives permission to push
-
 jobs:
   update:
     runs-on: ubuntu-latest
@@ -14,22 +11,14 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
       with:
-        token: ${{ secrets.GH_TOKEN }}
+        token: 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
         
     - name: Download and merge blocklists
       run: |
-        # Create new file with header
         echo "# Merged DNS Blocklist" > merged-dns-blocklist.txt
         echo "# Auto-updated: $(date)" >> merged-dns-blocklist.txt
-        echo "# Sources:" >> merged-dns-blocklist.txt
-        echo "# 1. doh-vpn-proxy-bypass.txt" >> merged-dns-blocklist.txt
-        echo "# 2. tif.txt" >> merged-dns-blocklist.txt
-        echo "# 3. ultimate.txt" >> merged-dns-blocklist.txt
-        echo "# 4. spam-tlds.txt" >> merged-dns-blocklist.txt
-        echo "# 5. dyndns.txt" >> merged-dns-blocklist.txt
         echo "" >> merged-dns-blocklist.txt
         
-        # Download each file
         curl -s "https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/adblock/doh-vpn-proxy-bypass.txt" >> merged-dns-blocklist.txt
         echo "" >> merged-dns-blocklist.txt
         curl -s "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/tif.txt" >> merged-dns-blocklist.txt
@@ -42,9 +31,13 @@ jobs:
         
     - name: Clean up file
       run: |
-        # Remove empty lines and sort uniquely
-        grep -v "^$" merged-dns-blocklist.txt | sort -u > temp.txt
-        mv temp.txt merged-dns-blocklist.txt
+        # Remove comments and empty lines, sort uniquely
+        grep -v "^#" merged-dns-blocklist.txt | grep -v "^$" | sort -u > temp.txt
+        # Re-add header
+        echo "# Merged DNS Blocklist" > merged-dns-blocklist.txt
+        echo "# Auto-updated: $(date)" >> merged-dns-blocklist.txt
+        echo "" >> merged-dns-blocklist.txt
+        cat temp.txt >> merged-dns-blocklist.txt
         
     - name: Commit and push
       run: |
