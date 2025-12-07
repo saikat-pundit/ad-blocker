@@ -22,13 +22,8 @@ jobs:
         curl -s "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/spam-tlds.txt" >> combined.txt
         curl -s "https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/adblock/dyndns.txt" >> combined.txt
         
-        # Clean up: remove comments, empty lines, keep only domains
-        grep -v '^!' combined.txt | \
-        grep -v '^#' | \
-        grep -v '^$' | \
-        grep -v '^/' | \
-        grep -v '##' | \
-        sed 's/^||//; s/\^.*$//; s/^0\.0\.0\.0 //; s/^127\.0\.0\.1 //' | \
+        # Clean up: keep only domains (removed comment cleaning)
+        sed 's/^||//; s/\^.*$//; s/^0\.0\.0\.0 //; s/^127\.0\.0\.1 //' combined.txt | \
         sort -u > blocklist.txt
         
         # Count and show
