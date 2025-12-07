@@ -1,7 +1,7 @@
 name: DNS Blocklist Updater
 on:
   schedule:
-    - cron: '0 0 * * *'  # ADD THIS LINE - runs daily at midnight UTC
+    -  cron: '30 3 * * *'  # 03:30 UTC = 9:00 AM IST
   workflow_dispatch:      # Keep this for manual runs
 
 permissions:
