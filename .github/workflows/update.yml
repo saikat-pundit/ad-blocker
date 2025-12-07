@@ -1,8 +1,6 @@
-name: Update DNS Blocklist
+name: DNS Blocklist Updater
 on:
-  schedule:
-    - cron: '0 12 * * *'  # Daily at 12 PM UTC
-  workflow_dispatch:       # Manual trigger button
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -10,93 +8,37 @@ permissions:
 jobs:
   update:
     runs-on: ubuntu-latest
-    
     steps:
-    - name: Checkout repository
+    
+    - name: Checkout code
       uses: actions/checkout@v4
       
-    - name: Merge all blocklists
+    - name: Create Blocklist
       run: |
-        echo "🔍 Downloading DNS blocklists..."
+        # Download and combine ALL lists
+        curl -s "https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/adblock/doh-vpn-proxy-bypass.txt" > combined.txt
+        curl -s "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/tif.txt" >> combined.txt
+        curl -s "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/ultimate.txt" >> combined.txt
+        curl -s "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/spam-tlds.txt" >> combined.txt
+        curl -s "https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/adblock/dyndns.txt" >> combined.txt
         
-        # Download all 5 lists
-        curl -s -L "https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/adblock/doh-vpn-proxy-bypass.txt" -o list1.txt
-        curl -s -L "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/tif.txt" -o list2.txt
-        curl -s -L "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/ultimate.txt" -o list3.txt
-        curl -s -L "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/spam-tlds.txt" -o list4.txt
-        curl -s -L "https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/adblock/dyndns.txt" -o list5.txt
+        # Clean up: remove comments, empty lines, keep only domains
+        grep -v '^!' combined.txt | \
+        grep -v '^#' | \
+        grep -v '^$' | \
+        grep -v '^/' | \
+        grep -v '##' | \
+        sed 's/^||//; s/\^.*$//; s/^0\.0\.0\.0 //; s/^127\.0\.0\.1 //' | \
+        sort -u > blocklist.txt
         
-        echo "✅ Downloads complete"
+        # Count and show
+        COUNT=$(wc -l < blocklist.txt)
+        echo "✅ Created blocklist.txt with $COUNT domains"
         
-        # Combine, clean, and sort
-        echo "🧹 Cleaning and merging..."
-        cat list*.txt | \
-          grep -v '^!' | \
-          grep -v '^#' | \
-          grep -v '^$' | \
-          grep -v '^/' | \
-          grep -v '##' | \
-          sed 's/^||//; s/\^.*$//; s/^0\.0\.0\.0 //; s/^127\.0\.0\.1 //' | \
-          sed '/^$/d' | \
-          sort -u > all-domains.txt
-        
-        # Count domains
-        DOMAIN_COUNT=$(wc -l < all-domains.txt)
-        echo "📊 Total unique domains: $DOMAIN_COUNT"
-        
-        # Create final file
-        echo "📝 Creating blocklist.txt..."
-        {
-          echo "# Auto-updated DNS Blocklist"
-          echo "# Generated: $(date -u)"
-          echo "# Sources:"
-          echo "# 1. doh-vpn-proxy-bypass.txt"
-          echo "# 2. tif.txt"
-          echo "# 3. ultimate.txt"
-          echo "# 4. spam-tlds.txt"
-          echo "# 5. dyndns.txt"
-          echo "# Total domains: $DOMAIN_COUNT"
-          echo ""
-          cat all-domains.txt
-        } > blocklist.txt
-        
-        # Also create hosts format
-        {
-          echo "# Hosts format - Auto-updated DNS Blocklist"
-          echo "# Generated: $(date -u)"
-          echo ""
-          sed 's/^/0.0.0.0 /' all-domains.txt
-        } > hosts-format.txt
-        
-        echo "✅ Files created:"
-        echo "   - blocklist.txt ($DOMAIN_COUNT domains)"
-        echo "   - hosts-format.txt"
-        
-    - name: Commit and Push
+    - name: Commit Changes
       run: |
-        echo "📤 Committing changes..."
-        git config --global user.email "github-actions@github.com"
-        git config --global user.name "GitHub Actions"
-        
-        # Check if there are changes
-        if git diff --quiet; then
-          echo "🟡 No changes detected"
-        else
-          git add blocklist.txt hosts-format.txt
-          git commit -m "🤖 Auto-update: $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
-          git push
-          echo "✅ Changes pushed successfully"
-        fi
-        
-    - name: Show Summary
-      run: |
-        echo "=== UPDATE COMPLETE ==="
-        echo "📁 Generated files:"
-        echo "1. blocklist.txt (plain domains)"
-        echo "2. hosts-format.txt (hosts file format)"
-        echo ""
-        echo "📊 Sample from blocklist.txt:"
-        echo "------------------------"
-        head -5 blocklist.txt
-        echo "..."
-        tail -5 blocklist.txt
+        git config user.name "GitHub Actions"
+        git config user.email "actions@github.com"
+        git add blocklist.txt
+        git commit -m "Update: $(date)" || echo "No changes"
+        git push
