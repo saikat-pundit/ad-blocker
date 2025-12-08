@@ -1,7 +1,7 @@
 name: DNS Blocklist Updater
 on:
   schedule:
-    - cron: '30 3 * * *'  # 03:30 UTC = 9:00 AM IST
+    - cron: '0 */3 * * *'  # Every 3 hours (at minute 0)
   workflow_dispatch:
 
 permissions:
@@ -17,10 +17,26 @@ jobs:
       
     - name: Create Blocklist
       run: |
-        # Create fresh file
-        > blocklist.txt
+        # Create fresh file with header
+        cat > blocklist.txt << 'EOF'
+127.0.0.1	localhost
+127.0.1.1	home-desktop
+
+# The following lines are desirable for IPv6 capable hosts
+::1     ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+
+# ==============================================
+# DNS Blocklist - Auto-generated
+# Last Updated: $(date -u)
+# ==============================================
+
+EOF
         
-        # Download and paste each link IN ORDER
+        # Download and append each link IN ORDER
         echo "=== doh-vpn-proxy-bypass.txt ===" >> blocklist.txt
         curl -s "https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/adblock/doh-vpn-proxy-bypass.txt" >> blocklist.txt
         echo "" >> blocklist.txt
@@ -126,12 +142,15 @@ jobs:
         echo "*.heytapmobi.com" >> blocklist.txt
         echo "*.heytap.com" >> blocklist.txt
         
-        echo "✅ Created blocklist.txt with all content in order"
+        # Update timestamp in header
+        sed -i "7s/.*/# Last Updated: $(date -u '+%Y-%m-%d %H:%M:%S UTC')/" blocklist.txt
+        
+        echo "✅ Created blocklist.txt with header and all content in order"
         
     - name: Commit Changes
       run: |
         git config user.name "GitHub Actions"
         git config user.email "actions@github.com"
         git add blocklist.txt
-        git commit -m "Update: $(date)" || echo "No changes"
+        git commit -m "Update: $(date -u '+%Y-%m-%d %H:%M:%S UTC')" || echo "No changes"
         git push
