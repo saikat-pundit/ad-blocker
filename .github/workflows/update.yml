@@ -104,17 +104,27 @@ jobs:
         echo "" >> blocklist.txt
         
         # === MANUAL HEYTAP DOMAINS ===
-        echo "=== Manual Heytap/Oppo/Realme Domains ===" >> blocklist.txt
-        echo "storeimg.heytapimg.com" >> blocklist.txt
-        echo "time-push-in.heytapmobile.com" >> blocklist.txt
-        echo "httpdns-push.heytapmobile.com" >> blocklist.txt
-        echo "client-uc.heytapmobi.com" >> blocklist.txt
-        echo "alt5-mtalk.google.com" >> blocklist.txt
-        # Wildcard for all heytap domains
-        echo "*.heytapimg.com" >> blocklist.txt
-        echo "*.heytapmobile.com" >> blocklist.txt
-        echo "*.heytapmobi.com" >> blocklist.txt
-        echo "*.heytap.com" >> blocklist.txt
+echo "=== Manual Heytap/Oppo/Realme Domains ===" >> blocklist.txt
+echo "storeimg.heytapimg.com" >> blocklist.txt
+echo "time-push-in.heytapmobile.com" >> blocklist.txt
+echo "httpdns-push.heytapmobile.com" >> blocklist.txt
+echo "client-uc.heytapmobi.com" >> blocklist.txt
+# Block ALL -mtalk.google.com domains
+echo "*.mtalk.google.com" >> blocklist.txt
+echo "alt1-mtalk.google.com" >> blocklist.txt
+echo "alt2-mtalk.google.com" >> blocklist.txt
+echo "alt3-mtalk.google.com" >> blocklist.txt
+echo "alt4-mtalk.google.com" >> blocklist.txt
+echo "alt5-mtalk.google.com" >> blocklist.txt
+echo "alt6-mtalk.google.com" >> blocklist.txt
+echo "alt7-mtalk.google.com" >> blocklist.txt
+echo "alt8-mtalk.google.com" >> blocklist.txt
+echo "mtalk.google.com" >> blocklist.txt
+# Wildcard for all heytap domains
+echo "*.heytapimg.com" >> blocklist.txt
+echo "*.heytapmobile.com" >> blocklist.txt
+echo "*.heytapmobi.com" >> blocklist.txt
+echo "*.heytap.com" >> blocklist.txt
         
         echo "✅ Created blocklist.txt with all content in order"
         
