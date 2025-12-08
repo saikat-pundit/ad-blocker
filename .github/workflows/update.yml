@@ -1,7 +1,7 @@
 name: DNS Blocklist Updater
 on:
   schedule:
-    - cron: '0 */3 * * *'  # Every 3 hours (at minute 0)
+    - cron: '30 2,5,8,11,14,17,20,23 * * *'  # Every 3 hours in IST (2:30, 5:30, 8:30, 11:30, 14:30, 17:30, 20:30, 23:30 IST)
   workflow_dispatch:
 
 permissions:
@@ -30,7 +30,7 @@ jobs:
         echo "" >> blocklist.txt
         echo "# ==============================================" >> blocklist.txt
         echo "# DNS Blocklist - Auto-generated" >> blocklist.txt
-        echo "# Last Updated: $(date -u)" >> blocklist.txt
+        echo "# Last Updated: $(TZ='Asia/Kolkata' date '+%Y-%m-%d %H:%M:%S IST')" >> blocklist.txt
         echo "# ==============================================" >> blocklist.txt
         echo "" >> blocklist.txt
         
@@ -139,8 +139,8 @@ jobs:
         echo "*.heytapmobi.com" >> blocklist.txt
         echo "*.heytap.com" >> blocklist.txt
         
-        # Update timestamp in header
-        sed -i "16s/.*/# Last Updated: $(date -u '+%Y-%m-%d %H:%M:%S UTC')/" blocklist.txt
+        # Update timestamp in header with IST
+        sed -i "16s/.*/# Last Updated: $(TZ='Asia/Kolkata' date '+%Y-%m-%d %H:%M:%S IST')/" blocklist.txt
         
         echo "✅ Created blocklist.txt with header and all content in order"
         
@@ -149,5 +149,5 @@ jobs:
         git config user.name "GitHub Actions"
         git config user.email "actions@github.com"
         git add blocklist.txt
-        git commit -m "Update: $(date -u '+%Y-%m-%d %H:%M:%S UTC')" || echo "No changes"
+        git commit -m "Update: $(TZ='Asia/Kolkata' date '+%Y-%m-%d %H:%M:%S IST')" || echo "No changes"
         git push
