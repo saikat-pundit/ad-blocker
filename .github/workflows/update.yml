@@ -42,8 +42,16 @@ jobs:
         curl -s "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/tif.txt" >> blocklist.txt
         echo "" >> blocklist.txt
         
-        echo "=== ultimate.txt ===" >> blocklist.txt
-        curl -s "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/ultimate.txt" >> blocklist.txt
+        echo "=== ultimate-compressed.txt ===" >> blocklist.txt
+        curl -s "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/hosts/ultimate-compressed.txt" >> blocklist.txt
+        echo "" >> blocklist.txt
+
+        echo "=== popupads.txt ===" >> blocklist.txt
+        curl -s "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/popupads.txt" >> blocklist.txt
+        echo "" >> blocklist.txt
+
+         echo "=== hoster.txt ===" >> blocklist.txt
+        curl -s "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/hoster.txt" >> blocklist.txt
         echo "" >> blocklist.txt
         
         echo "=== spam-tlds.txt ===" >> blocklist.txt
