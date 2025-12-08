@@ -15,120 +15,113 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
       
-    - name: Create Hosts File Blocklist
+    - name: Create Blocklist
       run: |
-        # Create fresh hosts file
-        echo "# Hosts file for blocking domains" > hosts-blocklist.txt
-        echo "# Generated: $(date)" >> hosts-blocklist.txt
-        echo "# Redirects to 0.0.0.1 (nowhere)" >> hosts-blocklist.txt
-        echo "" >> hosts-blocklist.txt
+        # Create fresh file
+        > blocklist.txt
         
-        # Create temporary files
-        > temp-domains.txt
+        # Download and paste each link IN ORDER
+        echo "=== doh-vpn-proxy-bypass.txt ===" >> blocklist.txt
+        curl -s "https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/adblock/doh-vpn-proxy-bypass.txt" >> blocklist.txt
+        echo "" >> blocklist.txt
         
-        # === DOWNLOAD ALL LISTS AND EXTRACT DOMAINS ===
+        echo "=== tif.txt ===" >> blocklist.txt
+        curl -s "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/tif.txt" >> blocklist.txt
+        echo "" >> blocklist.txt
         
-        # 1. hagezi lists
-        curl -s "https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/adblock/doh-vpn-proxy-bypass.txt" >> temp-domains.txt
-        echo "" >> temp-domains.txt
-        curl -s "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/tif.txt" >> temp-domains.txt
-        echo "" >> temp-domains.txt
-        curl -s "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/ultimate.txt" >> temp-domains.txt
-        echo "" >> temp-domains.txt
-        curl -s "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/spam-tlds.txt" >> temp-domains.txt
-        echo "" >> temp-domains.txt
-        curl -s "https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/adblock/dyndns.txt" >> temp-domains.txt
-        echo "" >> temp-domains.txt
-        curl -s "https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/adguard/dns-rebind-protection.txt" >> temp-domains.txt
-        echo "" >> temp-domains.txt
-        curl -s "https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/adblock/social.txt" >> temp-domains.txt
-        echo "" >> temp-domains.txt
+        echo "=== ultimate.txt ===" >> blocklist.txt
+        curl -s "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/ultimate.txt" >> blocklist.txt
+        echo "" >> blocklist.txt
         
-        # 2. Google blocklists
-        curl -s "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/analyticsparsed" >> temp-domains.txt
-        echo "" >> temp-domains.txt
-        curl -s "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/doubleclickparsed" >> temp-domains.txt
-        echo "" >> temp-domains.txt
-        curl -s "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/dnsparsed" >> temp-domains.txt
-        echo "" >> temp-domains.txt
-        curl -s "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/proxiesparsed" >> temp-domains.txt
-        echo "" >> temp-domains.txt
-        curl -s "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/shortlinksparsed" >> temp-domains.txt
-        echo "" >> temp-domains.txt
-        curl -s "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/fontsparsed" >> temp-domains.txt
-        echo "" >> temp-domains.txt
-        curl -s "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/productsparsed" >> temp-domains.txt
-        echo "" >> temp-domains.txt
-        curl -s "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/androidparsed" >> temp-domains.txt
-        echo "" >> temp-domains.txt
-        curl -s "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/fiberparsed" >> temp-domains.txt
-        echo "" >> temp-domains.txt
-        curl -s "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/firebaseparsed" >> temp-domains.txt
-        echo "" >> temp-domains.txt
-        curl -s "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/generalparsed" >> temp-domains.txt
-        echo "" >> temp-domains.txt
+        echo "=== spam-tlds.txt ===" >> blocklist.txt
+        curl -s "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/spam-tlds.txt" >> blocklist.txt
+        echo "" >> blocklist.txt
         
-        # 3. Additional lists
-        curl -s "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/native.oppo-realme.txt" >> temp-domains.txt
-        echo "" >> temp-domains.txt
-        curl -s "https://raw.githubusercontent.com/jmdugan/blocklists/master/corporations/microsoft/all" >> temp-domains.txt
-        echo "" >> temp-domains.txt
+        echo "=== dyndns.txt ===" >> blocklist.txt
+        curl -s "https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/adblock/dyndns.txt" >> blocklist.txt
+        echo "" >> blocklist.txt
         
-        # 4. Manual Heytap domains
-        echo "storeimg.heytapimg.com" >> temp-domains.txt
-        echo "time-push-in.heytapmobile.com" >> temp-domains.txt
-        echo "httpdns-push.heytapmobile.com" >> temp-domains.txt
-        echo "client-uc.heytapmobi.com" >> temp-domains.txt
-        echo "alt5-mtalk.google.com" >> temp-domains.txt
+        echo "=== dns-rebind-protection.txt ===" >> blocklist.txt
+        curl -s "https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/adguard/dns-rebind-protection.txt" >> blocklist.txt
+        echo "" >> blocklist.txt
         
-        # === CLEAN AND CONVERT TO HOSTS FORMAT ===
-        echo "# Processing domains..." >> hosts-blocklist.txt
+        echo "=== social.txt ===" >> blocklist.txt
+        curl -s "https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/adblock/social.txt" >> blocklist.txt
+        echo "" >> blocklist.txt
         
-        # Extract domains, clean, sort, remove duplicates
-        cat temp-domains.txt | \
-        # Remove comments and empty lines
-        grep -v '^!' | grep -v '^#' | grep -v '^$' | grep -v '^/' | grep -v '##' | \
-        # Extract domains from various formats
-        sed -e 's/^||//' -e 's/\^.*$//' -e 's/^0\.0\.0\.0 //' -e 's/^127\.0\.0\.1 //' -e 's/^:: //' | \
-        # Remove trailing whitespace
-        sed 's/[[:space:]]*$//' | \
-        # Remove lines starting with [ or containing :
-        grep -v '^\[' | grep -v ':' | \
-        # Keep only valid domain characters
-        grep -E '^[a-zA-Z0-9.*_-]+\.[a-zA-Z]{2,}' | \
-        # Sort and remove duplicates
-        sort -u | \
-        # Convert to hosts format: 0.0.0.1 domain.com
-        while read domain; do
-          # Handle wildcards - create multiple entries
-          if [[ "$domain" == *"*"* ]]; then
-            # For wildcards, just use base domain
-            base_domain=$(echo "$domain" | sed 's/^\*\.//')
-            echo "0.0.0.1 $base_domain" >> hosts-blocklist.txt
-          else
-            echo "0.0.0.1 $domain" >> hosts-blocklist.txt
-          fi
-        done
+        # === GOOGLE BLOCKLISTS ===
+        echo "=== analyticsparsed (Google Analytics) ===" >> blocklist.txt
+        curl -s "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/analyticsparsed" >> blocklist.txt
+        echo "" >> blocklist.txt
         
-        # Add Heytap wildcards manually
-        echo "" >> hosts-blocklist.txt
-        echo "# Heytap/Oppo/Realme wildcards" >> hosts-blocklist.txt
-        echo "0.0.0.1 heytapimg.com" >> hosts-blocklist.txt
-        echo "0.0.0.1 heytapmobile.com" >> hosts-blocklist.txt
-        echo "0.0.0.1 heytapmobi.com" >> hosts-blocklist.txt
-        echo "0.0.0.1 heytap.com" >> hosts-blocklist.txt
+        echo "=== doubleclickparsed (Google Ads) ===" >> blocklist.txt
+        curl -s "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/doubleclickparsed" >> blocklist.txt
+        echo "" >> blocklist.txt
         
-        # Add IPv6 support (optional)
-        echo "" >> hosts-blocklist.txt
-        echo "# IPv6 entries" >> hosts-blocklist.txt
-        echo "::1 localhost" >> hosts-blocklist.txt
+        echo "=== dnsparsed (Google DNS) ===" >> blocklist.txt
+        curl -s "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/dnsparsed" >> blocklist.txt
+        echo "" >> blocklist.txt
         
-        echo "✅ Created hosts-blocklist.txt in hosts file format"
+        echo "=== proxiesparsed (Google Proxies) ===" >> blocklist.txt
+        curl -s "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/proxiesparsed" >> blocklist.txt
+        echo "" >> blocklist.txt
+        
+        echo "=== shortlinksparsed (goo.gl links) ===" >> blocklist.txt
+        curl -s "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/shortlinksparsed" >> blocklist.txt
+        echo "" >> blocklist.txt
+        
+        echo "=== fontsparsed (Google Fonts) ===" >> blocklist.txt
+        curl -s "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/fontsparsed" >> blocklist.txt
+        echo "" >> blocklist.txt
+        
+        echo "=== productsparsed (Google Shopping) ===" >> blocklist.txt
+        curl -s "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/productsparsed" >> blocklist.txt
+        echo "" >> blocklist.txt
+        
+        echo "=== androidparsed (Android/Play Store) ===" >> blocklist.txt
+        curl -s "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/androidparsed" >> blocklist.txt
+        echo "" >> blocklist.txt
+        
+        echo "=== fiberparsed (Google Fiber) ===" >> blocklist.txt
+        curl -s "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/fiberparsed" >> blocklist.txt
+        echo "" >> blocklist.txt
+
+        echo "=== Firebase (Google Firebase) ===" >> blocklist.txt
+        curl -s "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/firebaseparsed" >> blocklist.txt
+        echo "" >> blocklist.txt
+
+        echo "=== General (Google General) ===" >> blocklist.txt
+        curl -s "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/generalparsed" >> blocklist.txt
+        echo "" >> blocklist.txt
+        
+        # === ADDITIONAL LISTS ===
+        echo "=== native.oppo-realme.txt ===" >> blocklist.txt
+        curl -s "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/native.oppo-realme.txt" >> blocklist.txt
+        echo "" >> blocklist.txt
+        
+        echo "=== Microsoft All (corporate) ===" >> blocklist.txt
+        curl -s "https://raw.githubusercontent.com/jmdugan/blocklists/master/corporations/microsoft/all" >> blocklist.txt
+        echo "" >> blocklist.txt
+        
+        # === MANUAL HEYTAP DOMAINS ===
+        echo "=== Manual Heytap/Oppo/Realme Domains ===" >> blocklist.txt
+        echo "storeimg.heytapimg.com" >> blocklist.txt
+        echo "time-push-in.heytapmobile.com" >> blocklist.txt
+        echo "httpdns-push.heytapmobile.com" >> blocklist.txt
+        echo "client-uc.heytapmobi.com" >> blocklist.txt
+        echo "alt5-mtalk.google.com" >> blocklist.txt
+        # Wildcard for all heytap domains
+        echo "*.heytapimg.com" >> blocklist.txt
+        echo "*.heytapmobile.com" >> blocklist.txt
+        echo "*.heytapmobi.com" >> blocklist.txt
+        echo "*.heytap.com" >> blocklist.txt
+        
+        echo "✅ Created blocklist.txt with all content in order"
         
     - name: Commit Changes
       run: |
         git config user.name "GitHub Actions"
         git config user.email "actions@github.com"
-        git add hosts-blocklist.txt
-        git commit -m "Update hosts file: $(date)" || echo "No changes"
+        git add blocklist.txt
+        git commit -m "Update: $(date)" || echo "No changes"
         git push
