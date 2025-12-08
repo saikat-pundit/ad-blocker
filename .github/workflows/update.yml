@@ -104,7 +104,7 @@ jobs:
         echo "" >> blocklist.txt
         
         # === MANUAL HEYTAP DOMAINS ===
-echo "=== Manual Heytap/Oppo/Realme Domains ===" >> blocklist.txt
+  echo "=== Manual Heytap/Oppo/Realme Domains ===" >> blocklist.txt
 echo "storeimg.heytapimg.com" >> blocklist.txt
 echo "time-push-in.heytapmobile.com" >> blocklist.txt
 echo "httpdns-push.heytapmobile.com" >> blocklist.txt
