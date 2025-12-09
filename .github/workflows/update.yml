@@ -130,6 +130,7 @@ jobs:
         echo "time-push-in.heytapmobile.com" >> blocklist.txt
         echo "httpdns-push.heytapmobile.com" >> blocklist.txt
         echo "client-uc.heytapmobi.com" >> blocklist.txt
+        echo "app-measurement.com" >> blocklist.txt
         # Block ALL -mtalk.google.com domains
         echo "*.mtalk.google.com" >> blocklist.txt
         echo "alt1-mtalk.google.com" >> blocklist.txt
@@ -146,6 +147,8 @@ jobs:
         echo "*.heytapmobile.com" >> blocklist.txt
         echo "*.heytapmobi.com" >> blocklist.txt
         echo "*.heytap.com" >> blocklist.txt
+        echo "*.app-measurement.com" >> blocklist.txt
+        echo "*app-measurement.com" >> blocklist.txt
         
         # Update timestamp in header with IST
         sed -i "16s/.*/# Last Updated: $(TZ='Asia/Kolkata' date '+%Y-%m-%d %H:%M:%S IST')/" blocklist.txt
