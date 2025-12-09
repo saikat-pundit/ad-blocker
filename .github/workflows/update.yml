@@ -147,6 +147,8 @@ jobs:
         echo "*.heytapmobile.com" >> blocklist.txt
         echo "*.heytapmobi.com" >> blocklist.txt
         echo "*.heytap.com" >> blocklist.txt
+        echo "*.heytapdl.com" >> blocklist.txt
+        echo "*.heytapdownload.com" >> blocklist.txt
         echo "*.app-measurement.com" >> blocklist.txt
         echo "*app-measurement.com" >> blocklist.txt
         
