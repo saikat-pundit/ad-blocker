@@ -1,7 +1,7 @@
 name: DNS Blocklist Updater
 on:
   schedule:
-    - cron: '30 11,17 * * *'
+    - cron: '30 6,11 * * *'
   workflow_dispatch:
 
 permissions:
