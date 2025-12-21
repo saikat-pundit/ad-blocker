@@ -17,187 +17,96 @@ jobs:
       
     - name: Create Blocklist
       run: |
-        # Create array of URLs to fetch with source names
-        declare -A sources=(
-          ["doh-vpn-proxy-bypass.txt"]="https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/adblock/doh-vpn-proxy-bypass.txt"
-          ["tif.txt"]="https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/tif.txt"
-          ["ultimate-compressed.txt"]="https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/hosts/ultimate-compressed.txt"
-          ["popupads.txt"]="https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/popupads.txt"
-          ["hoster.txt"]="https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/hoster.txt"
-          ["spam-tlds.txt"]="https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/spam-tlds.txt"
-          ["dyndns.txt"]="https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/adblock/dyndns.txt"
-          ["dns-rebind-protection.txt"]="https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/adguard/dns-rebind-protection.txt"
-          ["social.txt"]="https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/adblock/social.txt"
-          ["analyticsparsed"]="https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/analyticsparsed"
-          ["doubleclickparsed"]="https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/doubleclickparsed"
-          ["dnsparsed"]="https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/dnsparsed"
-          ["proxiesparsed"]="https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/proxiesparsed"
-          ["shortlinksparsed"]="https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/shortlinksparsed"
-          ["fontsparsed"]="https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/fontsparsed"
-          ["productsparsed"]="https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/productsparsed"
-          ["androidparsed"]="https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/androidparsed"
-          ["fiberparsed"]="https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/fiberparsed"
-          ["firebaseparsed"]="https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/firebaseparsed"
-          ["generalparsed"]="https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/generalparsed"
-          ["native.oppo-realme.txt"]="https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/native.oppo-realme.txt"
-          ["microsoft-all.txt"]="https://raw.githubusercontent.com/jmdugan/blocklists/master/corporations/microsoft/all"
+        # Create array of URLs to fetch
+        urls=(
+          "https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/adblock/doh-vpn-proxy-bypass.txt"
+          "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/tif.txt"
+          "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/hosts/ultimate-compressed.txt"
+          "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/popupads.txt"
+          "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/hoster.txt"
+          "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/spam-tlds.txt"
+          "https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/adblock/dyndns.txt"
+          "https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/adguard/dns-rebind-protection.txt"
+          "https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/adblock/social.txt"
+          "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/analyticsparsed"
+          "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/doubleclickparsed"
+          "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/dnsparsed"
+          "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/proxiesparsed"
+          "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/shortlinksparsed"
+          "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/fontsparsed"
+          "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/productsparsed"
+          "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/androidparsed"
+          "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/fiberparsed"
+          "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/firebaseparsed"
+          "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/generalparsed"
+          "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/native.oppo-realme.txt"
+          "https://raw.githubusercontent.com/jmdugan/blocklists/master/corporations/microsoft/all"
         )
         
-        # Create header with timestamp
-        last_updated=$(TZ='Asia/Kolkata' date '+%Y-%m-%d %H:%M:%S IST')
+        # Create header
         echo "# DNS Blocklist - Auto-generated" > blocklist.txt
-        echo "# Last Updated: $last_updated" >> blocklist.txt
+        echo "# Last Updated: $(TZ='Asia/Kolkata' date '+%Y-%m-%d %H:%M:%S IST')" >> blocklist.txt
         echo "# Sources: hagezi, nickspaargaren, jmdugan" >> blocklist.txt
-        echo "# Exclusions: facebook.com, all blogspot.com domains" >> blocklist.txt
         echo "# ==============================================" >> blocklist.txt
-        echo "" >> blocklist.txt
         
-        # Create temporary directory for parallel processing
-        temp_dir=$(mktemp -d)
-        
-        # Function to download and clean a single source
-        process_source() {
-          local name=$1
-          local url=$2
-          local temp_file="$temp_dir/$name"
-          
-          echo "Downloading: $name" >&2
-          curl -s --connect-timeout 30 --max-time 60 --retry 2 "$url" -o "$temp_file.raw" 2>/dev/null || return
-          
-          # Clean the file
-          cat "$temp_file.raw" | \
-          sed -e '/^[[:space:]]*#/d' \
-              -e '/^[[:space:]]*$/d' \
-              -e 's/^0\.0\.0\.0[[:space:]]*//' \
+        # Download all files in parallel and process
+        for url in "${urls[@]}"; do
+          curl -s "$url" | \
+          # Remove comments
+          sed '/^[[:space:]]*#/d' | \
+          # Remove empty lines
+          sed '/^[[:space:]]*$/d' | \
+          # Extract domains only (remove 0.0.0.0, 127.0.0.1 prefixes, ||, etc.)
+          sed -e 's/^0\.0\.0\.0[[:space:]]*//' \
               -e 's/^127\.0\.0\.1[[:space:]]*//' \
               -e 's/^||//' \
               -e 's/\^$//' \
               -e 's/^@@//' \
               -e 's/[[:space:]]*$//' \
-              -e '/^[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}[[:space:]]/d' \
-          > "$temp_file.clean"
-          
-          rm "$temp_file.raw"
-        }
-        
-        export -f process_source
-        export temp_dir
-        
-        # Download all sources in parallel
-        for name in "${!sources[@]}"; do
-          echo "$name ${sources[$name]}"
-        done | parallel -j 8 --colsep ' ' 'process_source {1} {2}'
-        
-        # Combine all cleaned files
-        cat "$temp_dir"/*.clean 2>/dev/null | \
-        # Add manual HeyTap domains
-        cat - << 'EOF'
-storeimg.heytapimg.com
-time-push-in.heytapmobile.com
-httpdns-push.heytapmobile.com
-client-uc.heytapmobi.com
-app-measurement.com
-*.mtalk.google.com
-alt1-mtalk.google.com
-alt2-mtalk.google.com
-alt3-mtalk.google.com
-alt4-mtalk.google.com
-alt5-mtalk.google.com
-alt6-mtalk.google.com
-alt7-mtalk.google.com
-alt8-mtalk.google.com
-mtalk.google.com
-*.heytapimg.com
-*.heytapmobile.com
-*.heytapmobi.com
-*.heytap.com
-*.heytapdl.com
-*.heytapdownload.com
-*.app-measurement.com
-*app-measurement.com
-EOF | \
-        # Remove empty lines
+              -e '/^[[:space:]]*$/d' \
+              -e '/^[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}[[:space:]]/d'
+        done | \
+        # Sort, remove duplicates, and filter
+        sort -u | \
+        # Remove invalid entries and clean up
         grep -v '^[[:space:]]*$' | \
-        # Remove IP addresses
-        grep -v '^[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}$' | \
-        # Remove invalid patterns
-        grep -v '^[[:space:]]*/' | \
-        grep -v '^[[:space:]]*\\' | \
-        grep -v '^[[:space:]]*!' | \
-        grep -v '^[[:space:]]*\[' | \
-        grep -v '^[[:space:]]*\]' | \
+        grep -v '^[0-9]\{1,3\}\.' | \
+        grep -v '^\.' | \
+        grep -v '^/' | \
+        grep -v '^\\' | \
+        grep -v '^\*' | \
+        grep -v '^\!' | \
+        grep -v '^\[.*\]$' | \
+        # Remove common non-domain patterns
+        grep -E '^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$' | \
         # Remove TLD-only entries
         awk 'length($0) > 3' | \
-        # Exclude Facebook and Blogger domains
-        grep -v '^facebook\.com$' | \
-        grep -v '^.*\.facebook\.com$' | \
-        grep -v '\.blogspot\.com$' | \
-        # Sort and deduplicate
-        sort -u | \
-        # Remove invalid domains (must contain a dot and valid chars)
-        grep -E '^[a-zA-Z0-9*.-]+\.[a-zA-Z]{2,}$' | \
-        # Remove duplicate wildcards (e.g., if both domain.com and *.domain.com exist)
-        awk '!seen[$0]++ && !/^\*/ || !sub(/^\*\./, "") || !seen[$0]++' >> blocklist.txt
-        
-        # Clean up temp directory
-        rm -rf "$temp_dir"
-        
-        # Update count in header
-        total_entries=$(sed -n '8,$p' blocklist.txt | wc -l)
-        sed -i "2s/.*/# Last Updated: $last_updated ($total_entries entries)/" blocklist.txt
+        # Add manual domains
+        cat - <(echo -e "storeimg.heytapimg.com\ntime-push-in.heytapmobile.com\nhttpdns-push.heytapmobile.com\nclient-uc.heytapmobi.com\napp-measurement.com") | \
+        # Final sort and deduplication
+        sort -u >> blocklist.txt
         
         echo "✅ Created optimized blocklist.txt"
-        echo "Total entries: $total_entries"
+        echo "Total entries: $(wc -l < blocklist.txt)"
         
-    - name: Validate Blocklist
+    - name: Create Alternative Formats (Optional)
       run: |
-        # Quick validation
-        echo "Blocklist validation:"
-        echo "First 5 entries:"
-        head -10 blocklist.txt
-        echo ""
-        echo "Last 5 entries:"
-        tail -5 blocklist.txt
-        echo ""
-        echo "Checking for common issues:"
+        # Create hosts format (if needed)
+        awk '{print "0.0.0.0 " $0}' blocklist.txt > blocklist.hosts
+        echo "# Total entries: $(wc -l < blocklist.hosts)" >> blocklist.hosts
         
-        # Check for Facebook (should be excluded)
-        if grep -q "facebook\.com" blocklist.txt; then
-          echo "❌ WARNING: Facebook domains found in blocklist!"
-          grep "facebook\.com" blocklist.txt
-        else
-          echo "✅ Facebook correctly excluded"
-        fi
+        # Create compressed version with wildcards
+        awk '{print "*." $0}' blocklist.txt > blocklist.wildcards
+        sort -u blocklist.wildcards -o blocklist.wildcards
+        echo "# Total entries: $(wc -l < blocklist.wildcards)" >> blocklist.wildcards
         
-        # Check for Blogger (should be excluded)
-        if grep -q "blogspot\.com" blocklist.txt; then
-          echo "❌ WARNING: Blogger domains found in blocklist!"
-          grep "blogspot\.com" blocklist.txt | head -5
-        else
-          echo "✅ Blogger correctly excluded"
-        fi
-        
-        # Check for HeyTap domains (should be included)
-        if grep -q "heytap" blocklist.txt; then
-          echo "✅ HeyTap domains included"
-        else
-          echo "❌ HeyTap domains missing!"
-        fi
+        # Create domains-only version for pi-hole/etc
+        cp blocklist.txt blocklist.domains
         
     - name: Commit Changes
       run: |
         git config user.name "GitHub Actions"
         git config user.email "actions@github.com"
         git add blocklist.txt
-        
-        # Get changes count
-        changes=$(git diff --cached --numstat | awk '{print $1}')
-        
-        if [ "$changes" != "" ] && [ "$changes" != "0" ]; then
-          total_entries=$(wc -l < blocklist.txt)
-          git commit -m "Update blocklist: $last_updated - $total_entries entries"
-          git push
-          echo "✅ Changes committed and pushed"
-        else
-          echo "⏭️ No changes to commit"
-        fi
+        git commit -m "Update blocklist: $(TZ='Asia/Kolkata' date '+%Y-%m-%d %H:%M:%S IST') - $(wc -l < blocklist.txt) entries" || echo "No changes"
+        git push
