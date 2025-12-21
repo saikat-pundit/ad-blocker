@@ -1,2 +1,0 @@
-# ad-blocker
-personalised adblocker
