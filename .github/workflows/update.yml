@@ -47,7 +47,7 @@ jobs:
         echo "# DNS Blocklist - Auto-generated" > blocklist.txt
         echo "# Last Updated: $(TZ='Asia/Kolkata' date '+%Y-%m-%d %H:%M:%S IST')" >> blocklist.txt
         echo "# Sources: hagezi, nickspaargaren, jmdugan" >> blocklist.txt
-        echo "# Manual exclusions: facebook.com, specific blogspot domains" >> blocklist.txt
+        echo "# Exclusions: facebook.com, all blogspot.com domains" >> blocklist.txt
         echo "# ==============================================" >> blocklist.txt
         
         # Temporary file for processing
@@ -56,7 +56,7 @@ jobs:
         # Download all files and process
         for url in "${urls[@]}"; do
           echo "Downloading: $url" >&2
-          curl -s --connect-timeout 30 "$url" | \
+          curl -s --connect-timeout 30 --max-time 60 "$url" | \
           # Remove comments and empty lines
           sed -e '/^[[:space:]]*#/d' -e '/^[[:space:]]*$/d' | \
           # Extract domains only
@@ -69,6 +69,7 @@ jobs:
         done >> "$temp_file"
         
         # Add manual HeyTap domains (INCLUDING WILDCARDS)
+        # Using 'EOF' (with quotes) keeps * as literal characters
         cat >> "$temp_file" << 'EOF'
 storeimg.heytapimg.com
 time-push-in.heytapmobile.com
@@ -101,7 +102,7 @@ EOF
         grep -v '^[[:space:]]*$' | \
         # Remove IP addresses
         grep -v '^[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' | \
-        # Remove lines starting with special characters (but KEEP wildcards)
+        # Remove lines starting with / \ ! [ ] (but keep wildcards *)
         grep -v '^[[:space:]]*/' | \
         grep -v '^[[:space:]]*\\' | \
         grep -v '^[[:space:]]*!' | \
