@@ -17,17 +17,17 @@ jobs:
       
     - name: Create Blocklist
       run: |
-        # Create array of URLs to fetch
+        # Changed URLs to their plain /domains/ format where applicable to reduce size and parsing errors
         urls=(
-          "https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/adblock/doh-vpn-proxy-bypass.txt"
+          "https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/domains/doh-vpn-proxy-bypass.txt"
           "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/tif.txt"
-          "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/hosts/ultimate-compressed.txt"
-          "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/popupads.txt"
-          "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/hoster.txt"
-          "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/spam-tlds.txt"
-          "https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/adblock/dyndns.txt"
-          "https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/adguard/dns-rebind-protection.txt"
-          "https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/adblock/social.txt"
+          "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/ultimate.txt"
+          "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/popupads.txt"
+          "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/hoster.txt"
+          "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/spam-tlds.txt"
+          "https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/domains/dyndns.txt"
+          "https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/domains/dns-rebind-protection.txt"
+          "https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/domains/social.txt"
           "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/analyticsparsed"
           "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/doubleclickparsed"
           "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/dnsparsed"
@@ -43,40 +43,34 @@ jobs:
           "https://raw.githubusercontent.com/jmdugan/blocklists/master/corporations/microsoft/all"
         )
         
-        # Create header
+        # Create headers
         echo "# DNS Blocklist - Auto-generated" > blocklist.txt
         echo "# Last Updated: $(TZ='Asia/Kolkata' date '+%Y-%m-%d %H:%M:%S IST')" >> blocklist.txt
         echo "# Sources: hagezi, nickspaargaren, jmdugan" >> blocklist.txt
         echo "# ==============================================" >> blocklist.txt
         
-        # Download all files and keep original format
+        # Download, sanitize, and merge files
         for url in "${urls[@]}"; do
           echo "Processing: $url" >&2
           curl -s "$url"
         done | \
+        # Strip carriage returns, comments, and empty lines to reduce size
+        sed 's/\r//g' | grep -v -E '^#|^!' | grep -v '^\s*$' | \
+        # Strip 0.0.0.0 or 127.0.0.1 if any slip through
+        sed -E 's/^(0\.0\.0\.0|127\.0\.0\.1)[[:space:]]+//' | \
         # Sort and remove duplicates
         sort -u | \
-        # Remove Facebook domains
-        grep -v -E '^.*facebook\.com$' | \
-        grep -v -E '^.*\.fb\.com$' | \
-        grep -v -E '^.*\.facebook\.com$' | \
-        grep -v -E '^.*\.blogspot\.com$' | \
-        grep -v -E '^blogspot\.com$' | \
-        grep -v -E '^fb\.com$' | \
-        grep -v -E '^facebook\.com$' >> blocklist.txt
+        # Cleaned up grep for Facebook/Blogspot removals
+        grep -v -E '(facebook\.com$|\.fb\.com$|^fb\.com$|blogspot\.com$)' >> blocklist.txt
         
-        # Add manual domains section at the end
+        # Add exact manual domains to blocklist.txt
         echo "" >> blocklist.txt
-        echo "# === MANUAL HEYTAP DOMAINS ===" >> blocklist.txt
+        echo "# === MANUAL EXACT DOMAINS ===" >> blocklist.txt
         echo "storeimg.heytapimg.com" >> blocklist.txt
         echo "time-push-in.heytapmobile.com" >> blocklist.txt
         echo "httpdns-push.heytapmobile.com" >> blocklist.txt
         echo "client-uc.heytapmobi.com" >> blocklist.txt
         echo "app-measurement.com" >> blocklist.txt
-        
-        echo "" >> blocklist.txt
-        echo "# === MTALK.GOOGLE.COM DOMAINS ===" >> blocklist.txt
-        echo "*.mtalk.google.com" >> blocklist.txt
         echo "alt1-mtalk.google.com" >> blocklist.txt
         echo "alt2-mtalk.google.com" >> blocklist.txt
         echo "alt3-mtalk.google.com" >> blocklist.txt
@@ -87,24 +81,27 @@ jobs:
         echo "alt8-mtalk.google.com" >> blocklist.txt
         echo "mtalk.google.com" >> blocklist.txt
         
-        echo "" >> blocklist.txt
-        echo "# === WILDCARD HEYTAP DOMAINS ===" >> blocklist.txt
-        echo "*.heytapimg.com" >> blocklist.txt
-        echo "*.heytapmobile.com" >> blocklist.txt
-        echo "*.heytapmobi.com" >> blocklist.txt
-        echo "*.heytap.com" >> blocklist.txt
-        echo "*.heytapdl.com" >> blocklist.txt
-        echo "*.heytapdownload.com" >> blocklist.txt
-        echo "*.app-measurement.com" >> blocklist.txt
-        echo "*app-measurement.com" >> blocklist.txt
+        # Create a separate file specifically for wildcard domains
+        echo "# === WILDCARD DOMAINS ===" > additionalHosts.txt
+        echo "*.heytapimg.com" >> additionalHosts.txt
+        echo "*.heytapmobile.com" >> additionalHosts.txt
+        echo "*.heytapmobi.com" >> additionalHosts.txt
+        echo "*.heytap.com" >> additionalHosts.txt
+        echo "*.heytapdl.com" >> additionalHosts.txt
+        echo "*.heytapdownload.com" >> additionalHosts.txt
+        echo "*.app-measurement.com" >> additionalHosts.txt
+        echo "*app-measurement.com" >> additionalHosts.txt
+        echo "*.mtalk.google.com" >> additionalHosts.txt
         
-        echo "✅ Created blocklist.txt"
-        echo "Total entries: $(grep -v '^#' blocklist.txt | grep -v '^=' | wc -l)"
+        echo "✅ Created blocklist.txt and additionalHosts.txt"
+        echo "Total exact entries: $(grep -v '^#' blocklist.txt | grep -v '^=' | grep -v '^\s*$' | wc -l)"
+        echo "Total wildcard entries: $(grep -v '^#' additionalHosts.txt | grep -v '^=' | grep -v '^\s*$' | wc -l)"
         
     - name: Commit Changes
       run: |
         git config user.name "GitHub Actions"
         git config user.email "actions@github.com"
-        git add blocklist.txt
-        git commit -m "Update blocklist: $(TZ='Asia/Kolkata' date '+%Y-%m-%d %H:%M:%S IST') - $(grep -v '^#' blocklist.txt | grep -v '^=' | wc -l) entries" || echo "No changes"
+        # Make sure to add both files
+        git add blocklist.txt additionalHosts.txt
+        git commit -m "Update blocklist: $(TZ='Asia/Kolkata' date '+%Y-%m-%d %H:%M:%S IST')" || echo "No changes"
         git push
