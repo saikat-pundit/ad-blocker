@@ -44,7 +44,6 @@ jobs:
             "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/dnsparsed"
             "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/proxiesparsed"
             "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/shortlinksparsed"
-            "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/fontsparsed"
             "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/productsparsed"
             "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/androidparsed"
             "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/fiberparsed"
