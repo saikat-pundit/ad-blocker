@@ -1,0 +1,17 @@
+{
+  "manifest_version": 2,
+  "name": "Simple Social Ad Hider",
+  "version": "1.0",
+  "description": "Hides Sponsored posts on Facebook and Promoted tweets on X.",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.facebook.com/*",
+        "*://*.twitter.com/*",
+        "*://*.x.com/*"
+      ],
+      "js": ["hide_ads.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
