@@ -3,7 +3,7 @@
 ::1 ip6-localhost ip6-loopback
 
 # DNS Blocklist - Auto-generated
-# Last Updated: 2026-05-13 14:52:26 IST
+# Last Updated: 2026-05-13 19:04:42 IST
 # ==============================================
 
 (function(){
