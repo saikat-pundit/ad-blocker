@@ -30,15 +30,15 @@ jobs:
           touch temp_domains.txt
           
           urls=(
-            "https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/domains/doh-vpn-proxy-bypass.txt"
-            "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/tif.txt"
-            "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/ultimate.txt"
-            "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/popupads.txt"
-            "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/hoster.txt"
-            "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/spam-tlds.txt"
-            "https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/domains/dyndns.txt"
-            "https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/domains/dns-rebind-protection.txt"
-            "https://gitlab.com/hagezi/mirror/-/raw/main/dns-blocklists/domains/social.txt"
+            "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/doh-vpn-proxy-bypass.txt"
+            "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/hoster.txt"
+            "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/ultimate.txt"
+            "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/popupads.txt"
+            "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/hoster.txt"
+            "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/spam-tlds.txt"
+            "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/dyndns.txt"
+            "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adguard/dns-rebind-protection.txt"
+            "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/social.txt"
             "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/analyticsparsed"
             "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/doubleclickparsed"
             "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/dnsparsed"
@@ -49,8 +49,10 @@ jobs:
             "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/fiberparsed"
             "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/firebaseparsed"
             "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/generalparsed"
-            "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/domains/native.oppo-realme.txt"
+            "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/native.oppo-realme.txt"
             "https://raw.githubusercontent.com/jmdugan/blocklists/master/corporations/microsoft/all"
+            "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/native.xiaomi.txt"
+            "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/native.winoffice.txt"
           )
           
           for url in "${urls[@]}"; do
