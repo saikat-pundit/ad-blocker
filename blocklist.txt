@@ -3,7 +3,7 @@
 ::1 ip6-localhost ip6-loopback
 
 # DNS Blocklist - Auto-generated
-# Last Updated: 2026-08-03 15:40:25 IST
+# Last Updated: 2026-08-03 19:26:27 IST
 # ==============================================
 
 -chromecontentsuggestions-pa.googleapis.com
