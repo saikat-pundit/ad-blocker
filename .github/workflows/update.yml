@@ -13,97 +13,27 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        
-      - name: Create Blocklist
-        run: |
-          # 1. Initialize file with mandatory system localhost entries
-          echo "127.0.0.1 localhost" > blocklist.txt
-          echo "127.0.1.1 home-desktop" >> blocklist.txt
-          echo "::1 ip6-localhost ip6-loopback" >> blocklist.txt
-          echo "" >> blocklist.txt
-          echo "# DNS Blocklist - Auto-generated" >> blocklist.txt
-          echo "# Last Updated: $(TZ='Asia/Kolkata' date '+%Y-%m-%d %H:%M:%S IST')" >> blocklist.txt
-          echo "# ==============================================" >> blocklist.txt
-          echo "" >> blocklist.txt
-          
-          # 2. Process external URLs securely into a temporary file
-          touch temp_domains.txt
-          
-          urls=(
-            "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/doh-vpn-proxy-bypass.txt"
-            "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/hoster.txt"
-            "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/ultimate.txt"
-            "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/popupads.txt"
-            "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/hoster.txt"
-            "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/spam-tlds.txt"
-            "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/dyndns.txt"
-            "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adguard/dns-rebind-protection.txt"
-            "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/social.txt"
-            "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/analyticsparsed"
-            "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/doubleclickparsed"
-            "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/dnsparsed"
-            "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/proxiesparsed"
-            "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/shortlinksparsed"
-            "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/productsparsed"
-            "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/androidparsed"
-            "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/fiberparsed"
-            "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/firebaseparsed"
-            "https://raw.githubusercontent.com/nickspaargaren/no-google/master/categories/generalparsed"
-            "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/native.oppo-realme.txt"
-            "https://raw.githubusercontent.com/jmdugan/blocklists/master/corporations/microsoft/all"
-            "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/native.xiaomi.txt"
-            "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/native.winoffice.txt"
-          )
-          
-          for url in "${urls[@]}"; do
-            echo "Fetching: $url"
-            curl -sL "$url" >> temp_domains.txt
-          done
-          
-          # 3. Clean, format, and append the domains
-            cat temp_domains.txt | \
-            sed 's/\r//g' | \
-            grep -v -E '^#|^!|^[[:space:]]*$' | \
-            sed -E 's/^(0\.0\.0\.0|127\.0\.0\.1)[[:space:]]+//' | \
-            grep -v -E '(facebook\.com$|\.fb\.com$|^fb\.com$|blogspot\.com$)' | \
-            awk '{print $1}' | \
-            sort -u >> blocklist.txt
-            
-          rm temp_domains.txt
-          
-          # 4. Append Manual Exact Domains
-          echo "" >> blocklist.txt
-                    echo "storeimg.heytapimg.com" >> blocklist.txt
-          echo "time-push-in.heytapmobile.com" >> blocklist.txt
-          echo "httpdns-push.heytapmobile.com" >> blocklist.txt
-          echo "client-uc.heytapmobi.com" >> blocklist.txt
-          echo "app-measurement.com" >> blocklist.txt
-          echo "alt1-mtalk.google.com" >> blocklist.txt
-          echo "alt2-mtalk.google.com" >> blocklist.txt
-          echo "alt3-mtalk.google.com" >> blocklist.txt
-          echo "alt4-mtalk.google.com" >> blocklist.txt
-          echo "alt5-mtalk.google.com" >> blocklist.txt
-          echo "alt6-mtalk.google.com" >> blocklist.txt
-          echo "alt7-mtalk.google.com" >> blocklist.txt
-          echo "alt8-mtalk.google.com" >> blocklist.txt
-          echo "mtalk.google.com" >> blocklist.txt
-          
-          # 5. Add Wildcard comments (Informational only)
-          echo "" >> blocklist.txt
-          echo "# === WILDCARD DOMAINS (Not natively supported by /etc/hosts) ===" >> blocklist.txt
-          echo "# *.heytapimg.com" >> blocklist.txt
-          echo "# *.heytapmobile.com" >> blocklist.txt
-          echo "# *.heytapmobi.com" >> blocklist.txt
-          echo "# *.heytap.com" >> blocklist.txt
-          echo "# *.heytapdl.com" >> blocklist.txt
-          echo "# *.heytapdownload.com" >> blocklist.txt
-          echo "# *.app-measurement.com" >> blocklist.txt
-          echo "# *.mtalk.google.com" >> blocklist.txt
 
-      - name: Commit Changes
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
         run: |
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
-          git add blocklist.txt
-          git commit -m "Update blocklist: $(TZ='Asia/Kolkata' date '+%Y-%m-%d %H:%M:%S IST')" || echo "No changes"
-          git push
+          pip install requests pytz
+
+      - name: Generate Blocklist
+        run: python update_blocklist.py
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: adblocker
+          name: "AdBlock List"
+          body: "Auto-generated DNS blocklist"
+          files: blocklist.txt
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
