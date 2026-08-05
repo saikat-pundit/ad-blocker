@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 import requests
 import os
 from datetime import datetime
@@ -29,6 +28,14 @@ urls = [
     "https://raw.githubusercontent.com/jmdugan/blocklists/master/corporations/microsoft/all",
     "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/native.xiaomi.txt",
     "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/native.winoffice.txt",
+    "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/tif.txt",
+    "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/pro.txt",
+    "https://blocklistproject.github.io/Lists/adguard/ads-ags.txt",
+    "https://blocklistproject.github.io/Lists/adguard/redirect-ags.txt",
+    "https://blocklistproject.github.io/Lists/adguard/phishing-ags.txt",
+    "https://blocklistproject.github.io/Lists/adguard/scam-ags.txt",
+    "https://blocklistproject.github.io/Lists/adguard/tracking-ags.txt",
+    "https://blocklistproject.github.io/Lists/adguard/gambling-ags.txt",
 ]
 
 # Manual domains
@@ -68,6 +75,30 @@ def fetch_url(url):
         print(f"✗ {url.split('/')[-1][:30]:30} | ERROR: {str(e)[:30]}")
         return None
 
+def clean_domains(domains):
+    """Remove duplicates and optimize domain list by removing subdomains"""
+    # Remove duplicates (set already handles this)
+    cleaned = set(domains)
+    
+    # Remove subdomains if parent domain exists (optimization)
+    # Example: if "google.com" exists, remove "mail.google.com"
+    sorted_domains = sorted(cleaned, key=lambda x: x.count('.') * -1)  # Sort by subdomain count (highest first)
+    parent_domains = set()
+    
+    for domain in sorted_domains:
+        parts = domain.split('.')
+        # Check if any parent domain exists (e.g., google.com for mail.google.com)
+        is_subdomain = False
+        for i in range(1, len(parts)):
+            parent = '.'.join(parts[i:])
+            if parent in parent_domains:
+                is_subdomain = True
+                break
+        if not is_subdomain:
+            parent_domains.add(domain)
+    
+    return parent_domains
+
 print(f"\n{'File':32} | Size")
 print("-" * 55)
 
@@ -87,7 +118,7 @@ blocklist = [
 ]
 
 # Fetch and process domains
-domains = set()
+raw_domains = set()
 failed = 0
 
 for url in urls:
@@ -96,7 +127,7 @@ for url in urls:
         for line in content.splitlines():
             line = line.strip()
             if line and not line.startswith(('#', '!', '0.0.0.0', '127.0.0.1')):
-                domains.add(line.split()[0] if ' ' in line else line)
+                raw_domains.add(line.split()[0] if ' ' in line else line)
     else:
         failed += 1
 
@@ -104,7 +135,11 @@ print("-" * 55)
 print(f"Total: {len(urls)} files, Failed: {failed}, Success: {len(urls)-failed}")
 
 # Filter out unwanted domains
-domains = {d for d in domains if not any(x in d for x in ['facebook.com', '.fb.com', 'blogspot.com'])}
+raw_domains = {d for d in raw_domains if not any(x in d for x in ['facebook.com', '.fb.com', 'blogspot.com'])}
+
+# Clean and optimize domains (remove duplicates & subdomains)
+print("\n🧹 Optimizing domain list...")
+domains = clean_domains(raw_domains)
 
 # Add manual domains
 domains.update(manual_domains)
@@ -123,4 +158,4 @@ with open('blocklist.txt', 'w') as f:
 
 file_size = format_size(os.path.getsize('blocklist.txt'))
 print(f"\n✅ Blocklist generated: blocklist.txt ({file_size})")
-print(f"📊 Total domains: {len(domains)}")
+print(f"📊 Raw domains: {len(raw_domains)} → Optimized: {len(domains)} (removed {len(raw_domains) - len(domains)} duplicates/subdomains)")
