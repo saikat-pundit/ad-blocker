@@ -36,6 +36,10 @@ urls = [
     "https://blocklistproject.github.io/Lists/adguard/scam-ags.txt",
     "https://blocklistproject.github.io/Lists/adguard/tracking-ags.txt",
     "https://blocklistproject.github.io/Lists/adguard/gambling-ags.txt",
+    "https://easylist.to/easylist/easylist.txt",
+    "https://easylist.to/easylist/easyprivacy.txt",
+    "https://secure.fanboy.co.nz/fanboy-cookiemonster.txt",
+    "https://secure.fanboy.co.nz/fanboy-annoyance.txt"
 ]
 
 # Manual domains
