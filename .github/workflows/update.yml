@@ -26,12 +26,24 @@ jobs:
       - name: Generate Blocklist
         run: python update_blocklist.py
 
+      - name: Delete old release assets
+        uses: dev-drprasad/delete-tag-and-release@v1.1
+        with:
+          tag_name: adblocker
+          delete_release: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        continue-on-error: true
+
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: adblocker
           name: "AdBlock List"
-          body: "Auto-generated DNS blocklist"
+          body: |
+            ## DNS Blocklist Update
+            - 📦 Auto-generated from 22 blocklists
+            - 🚫 Blocks tracking, ads, and malicious domains
           files: blocklist.txt
           draft: false
           prerelease: false
