@@ -50,7 +50,7 @@ jobs:
           name: "AdBlock List"
           body: |
             ## DNS Blocklist Update
-            - 📅 Updated: ${{ github.event.head_commit.timestamp }}
+            - 📅 Updated: $(date '+%Y-%m-%d %H:%M:%S UTC')
             - 📦 Auto-generated from 22 blocklists
             - 🚫 Blocks tracking, ads, and malicious domains
           files: blocklist.txt
