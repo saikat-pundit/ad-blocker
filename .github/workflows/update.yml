@@ -26,6 +26,14 @@ jobs:
       - name: Generate Blocklist
         run: python update_blocklist.py
 
+      - name: Commit and push blocklist to root
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add blocklist.txt
+          git commit -m "Update blocklist: $(date '+%Y-%m-%d %H:%M:%S')" || echo "No changes"
+          git push
+
       - name: Delete old release assets
         uses: dev-drprasad/delete-tag-and-release@v1.1
         with:
@@ -42,6 +50,7 @@ jobs:
           name: "AdBlock List"
           body: |
             ## DNS Blocklist Update
+            - 📅 Updated: ${{ github.event.head_commit.timestamp }}
             - 📦 Auto-generated from 22 blocklists
             - 🚫 Blocks tracking, ads, and malicious domains
           files: blocklist.txt
