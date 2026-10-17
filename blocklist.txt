@@ -3,7 +3,7 @@
 ::1 ip6-localhost ip6-loopback
 
 # DNS Blocklist - Auto-generated
-# Last Updated: 2026-10-17 16:31:02 IST
+# Last Updated: 2026-10-17 19:47:59 IST
 # ==============================================
 
 $csp=child-src
@@ -134262,6 +134262,7 @@ zyvwtasyon.com
 ||39phbet.cc^
 ||39policedrive.com^
 ||39q0imqo0.com^
+||39q173t8llpnwrhj.cfd^
 ||39qcasino.com^
 ||39qma.top^
 ||39r.casino^
@@ -235482,6 +235483,7 @@ zyvwtasyon.com
 ||aczopdxfy.com^
 ||aczqghbgetaef.store^
 ||aczridptoo.com^
+||acztihozztf.in^
 ||aczugz.courses^
 ||aczxx.com^
 ||ad-1.co.jp^
@@ -417484,6 +417486,7 @@ zyvwtasyon.com
 ||athmyrefund.co.uk^
 ||athoai.com^
 ||athodesigns.com^
+||athodydspakedankle.cfd^
 ||athoi-inc.com^
 ||atholart.xyz^
 ||atholassistant.xyz^
@@ -594170,6 +594173,7 @@ zyvwtasyon.com
 ||bopx.club^
 ||bopx.net^
 ||bopyq.myhillcountrygrass.com^
+||bopyrusfinalehazers.qpon^
 ||boq-reward.click^
 ||boqbank.com^
 ||boqdapoiv.com^
@@ -687935,6 +687939,7 @@ zyvwtasyon.com
 ||carveplatform.xyz^
 ||carveport.xyz^
 ||carverank.xyz^
+||carverarist.qpon^
 ||carverartsandscience.org^
 ||carverbtc.xyz^
 ||carvercbd.xyz^
@@ -783931,6 +783936,7 @@ zyvwtasyon.com
 ||ciszhp.finanzfrage.net^
 ||ciszhp.gesundheitsfrage.net^
 ||ciszhp.motorradfrage.net^
+||ciszpowvmurfp.space^
 ||cit-cli-metrics.appspot.com^
 ||cit.ee^
 ||cit.le.guidegoods.net^
@@ -786221,6 +786227,7 @@ zyvwtasyon.com
 ||ckhhsx.pics^
 ||ckhillulshshg.site^
 ||ckhq.suf.guidegoods.net^
+||ckhqqureiipcd.space^
 ||ckhtqypqrwuqv.online^
 ||ckhvizgq.xyz^
 ||ckianmeyjnw.com^
@@ -900570,6 +900577,7 @@ zyvwtasyon.com
 ||ctechcomputers.org^
 ||ctechikkk.com^
 ||ctechtracker.com^
+||ctecmklmglhyi.site^
 ||cteeuwen.shop^
 ||ctekshop.shop^
 ||ctemapp.xyz^
@@ -910367,6 +910375,7 @@ zyvwtasyon.com
 ||cvjkah.my^
 ||cvjm.social^
 ||cvjmyl.digital^
+||cvjqrgyifkets.online^
 ||cvjzauehxjsy.com^
 ||cvk.supklik.com^
 ||cvkib.top^
@@ -1018603,6 +1018612,7 @@ zyvwtasyon.com
 ||djeasypromos.com^
 ||djedi.biz^
 ||djelabquercic.com^
+||djeletflauukt.online^
 ||djelfaorix.digital^
 ||djelmonoseed.xyz^
 ||djenvy.org^
@@ -1071394,6 +1071404,7 @@ zyvwtasyon.com
 ||eabn.cn^
 ||eaboiretes.com^
 ||eabrkvxoe.bid^
+||eabsukuop.com^
 ||eac-aime.com^
 ||eac-office.ru^
 ||eac.fugaweb.africa^
@@ -1258673,6 +1258684,7 @@ zyvwtasyon.com
 ||frettchen-fun.de^
 ||frettchenasyll.de^
 ||frettchorten.top^
+||frettedqp.qpon^
 ||fretuio.life^
 ||fretumlimpsey.com^
 ||fretwalk.com^
@@ -1383334,6 +1383346,7 @@ zyvwtasyon.com
 ||gumverlyai.com^
 ||gumwclrwfrvit.site^
 ||gumyfui.com^
+||gumzldikmtrbm.online^
 ||gun-prices.com^
 ||gun2v2neoo.com^
 ||gunaassociates.in^
@@ -1396020,6 +1396033,7 @@ zyvwtasyon.com
 ||hangclub.xyz^
 ||hangdapps.xyz^
 ||hangdogmillionaire.com^
+||hangdogshuntersudd.cyou^
 ||hangdongforex.co.cc^
 ||hangdyb.hl.cn^
 ||hangdym.hl.cn^
@@ -1432304,6 +1432318,7 @@ zyvwtasyon.com
 ||hkg99f.com^
 ||hkg99login.com^
 ||hkgauyxrmsrdv.space^
+||hkgdqksnmxhfkd.com^
 ||hkgdxfjtqv.work^
 ||hkge99.org^
 ||hkgfk.com^
@@ -1455043,6 +1455058,7 @@ zyvwtasyon.com
 ||hrwfrjwrekmqd.site^
 ||hrwgsq.loesdau.de^
 ||hrwhwcyqjritt.xyz^
+||hrwiijarmrtsn.site^
 ||hrwindservices.com^
 ||hrwlolycdpmnw.site^
 ||hrwozjgbmxiad.website^
@@ -1492057,6 +1492073,7 @@ zyvwtasyon.com
 ||imagessatoshi.xyz^
 ||imagesspace.xyz^
 ||imagesstocks.xyz^
+||imagesstonage.com^
 ||imagestadium.xyz^
 ||imagestage.xyz^
 ||imagestar.actonsoftware.com^
@@ -1525320,6 +1525337,7 @@ zyvwtasyon.com
 ||iranianvanta.click^
 ||iranianvision.xyz^
 ||iranianwork.xyz^
+||iranicrocuta.cyou^
 ||iraniflux.click^
 ||iranioilmarket.com^
 ||iraniproxy.com^
@@ -1539947,6 +1539965,7 @@ zyvwtasyon.com
 ||jashopstore.quest^
 ||jashpalrohit.com^
 ||jashwin.is.wierd.spacejamhd.com^
+||jashxfsiqkksm.space^
 ||jashz.crateandbarrel.com^
 ||jasiek.online^
 ||jasieua.click^
@@ -1553260,6 +1553279,7 @@ zyvwtasyon.com
 ||jlff.center^
 ||jlffeu.nadula.com^
 ||jlfiber.advancedtech.com^
+||jlfiszmkxnyfb.site^
 ||jlflzjdt.com^
 ||jlfudnu.top^
 ||jlfuncasinoph.com^
@@ -1580383,6 +1580403,7 @@ zyvwtasyon.com
 ||kaotikostyle.shop^
 ||kaougnoklpzjb.space^
 ||kaovurex.vu^
+||kaowtjzddoh.com^
 ||kaoyanedu.net^
 ||kaozemnizhheg.website^
 ||kaozhengzaixian.com^
@@ -1606857,6 +1606878,7 @@ zyvwtasyon.com
 ||kpwcz.vip^
 ||kpwfjkjkm.com^
 ||kpwfp.com^
+||kpwgfmdvuudsj.online^
 ||kpwhkeehpsp.bid^
 ||kpwin.lat^
 ||kpwjtpgvowifq.com^
@@ -1615285,6 +1615307,7 @@ zyvwtasyon.com
 ||kzfnsemcdxxsq.website^
 ||kzfoqrsqubdgi.site^
 ||kzfreegames.online^
+||kzgbzylkrjfxa.space^
 ||kzgcq.hero.co^
 ||kzgkf.top^
 ||kzgqthcahcxbob.com^
@@ -1627161,6 +1627184,7 @@ zyvwtasyon.com
 ||lawnnningdreaming.info^
 ||lawnprosservices.com^
 ||lawns-simoom-kasme.space^
+||lawnsatieno.cfd^
 ||lawnserviceagent.com^
 ||lawnservicecolumbus.com^
 ||lawnservicedeland.com^
@@ -1797938,6 +1797962,7 @@ zyvwtasyon.com
 ||mhktricks.org^
 ||mhktxzxqhlzik.online^
 ||mhkufxshpxgps.website^
+||mhkzszmuxmmzk.website^
 ||mhl6cxailcj0x2rarogruc2j1cmdhcm1hawxlci5jb20vdwq4zwlqzm.acm-tax.gr^
 ||mhlaboratorios.com^
 ||mhlasdkrnd.com^
@@ -1816278,6 +1816303,7 @@ zyvwtasyon.com
 ||mkpp.com.ua^
 ||mkpqcbr.com^
 ||mkpscbr.com^
+||mkqatqmmgkrja.site^
 ||mkqepsxaz.bid^
 ||mkqg0.cfd^
 ||mkqkqslq.com^
@@ -1830059,6 +1830085,7 @@ zyvwtasyon.com
 ||mmvwvs.onl^
 ||mmvyur.dog^
 ||mmw.me^
+||mmwakrrbigmgq.site^
 ||mmwear.shop^
 ||mmwebf.digital^
 ||mmwebhandler.888.com^
@@ -1947048,6 +1947075,7 @@ zyvwtasyon.com
 ||oaocun.digital^
 ||oaodzs.best^
 ||oaogilidstvm.bid^
+||oaoldqdsxnr.com^
 ||oaonline.com.cn^
 ||oaotguvkw.com^
 ||oaozfw.run^
@@ -1962694,6 +1962722,7 @@ zyvwtasyon.com
 ||oltumuretoursandsafaris.com^
 ||oltxvanl.top^
 ||oltyecdn.xyz^
+||olubzvsgeiobq.site^
 ||oluchimedia.co.za^
 ||olufunkelaw.com^
 ||olug.life^
@@ -1964967,6 +1964996,7 @@ zyvwtasyon.com
 ||omroncorporation.sc.omtrdc.net^
 ||omroom.shop^
 ||omrushi.in^
+||omrvgnwyvdbom.website^
 ||omryapi.com^
 ||oms-analytics.trafficmanager.net^
 ||oms-edu.org^
@@ -2020673,6 +2020703,7 @@ zyvwtasyon.com
 ||patheats.xyz^
 ||patheconomy.xyz^
 ||pathedge.xyz^
+||pathednattier.cfd^
 ||pathepic.xyz^
 ||pathetic-practice.000webhostapp.com^
 ||patheticauto.xyz^
@@ -2068839,6 +2068870,7 @@ zyvwtasyon.com
 ||pinklion.io^$third-party
 ||pinklogy.com^
 ||pinklunar.xyz^
+||pinklycasinet.cyou^
 ||pinkmagazine.com.br^
 ||pinkmamma.xyz^
 ||pinkmanga.xyz^
@@ -2172229,6 +2172261,7 @@ zyvwtasyon.com
 ||qbdgnjwaknl.bid^
 ||qbdhppmsuheef.com^
 ||qbdlijgzxscfa.site^
+||qbdlwvyrzfxlf.online^
 ||qbdp.cloud^
 ||qbdphmakgqhnl.site^
 ||qbdtipd.qbinproduct.intuit.com^
@@ -2204138,6 +2204171,7 @@ zyvwtasyon.com
 ||rachmarie.com^
 ||rachome.xyz^
 ||rachow-handel.com^
+||rachscar.cfd^
 ||rachsport.shop^
 ||rachunki.online^
 ||rachunkowosc.online^
@@ -2372191,6 +2372225,7 @@ zyvwtasyon.com
 ||sheddingwheel.tk^
 ||shede8.com^
 ||shederdugdug.shop^
+||shedernauger.qpon^
 ||shedhome.xyz^
 ||shedhyper.xyz^
 ||shedi9.com^
@@ -2404565,6 +2404600,7 @@ zyvwtasyon.com
 ||sled.social^
 ||sledatnfc.aluxom.com^
 ||sledconveniencestuff.com^
+||sledderpatrole.com^
 ||sledermansol.xyz^
 ||sledfoolinfo.com^
 ||sledge.pw^
@@ -2449203,6 +2449239,7 @@ zyvwtasyon.com
 ||sowciable.com^
 ||sowebhost.tk^
 ||sowellness.be^
+||sowenswiggyrefries.cfd^
 ||sowereno.tk^
 ||sowernal.com^
 ||soweto.online^
@@ -2536277,6 +2536314,7 @@ zyvwtasyon.com
 ||sttsservice247.online^
 ||sttvapp.xyz^
 ||sttvisa.com^
+||sttzvhrjklope.website^
 ||stu-pit.com^
 ||stu-ssynederland.com^
 ||stu-vw.fit^
@@ -2589860,6 +2589898,7 @@ zyvwtasyon.com
 ||tdzjq.bestbetter.sbs^
 ||tdzosv.bett1.pl^
 ||tdzvm.pw^
+||tdzvvfdkcyhfv.online^
 ||te-ama.com^
 ||te-hmfe-pd-20250925t092533197-6873-h7klu0g0qg.com^
 ||te-lovendo.com^
@@ -2642735,6 +2642774,7 @@ zyvwtasyon.com
 ||tjwzm.com^
 ||tjwzyjx.icu^
 ||tjx.112.2o7.net^
+||tjxcqzyrfamtk.site^
 ||tjxgzm.com^
 ||tjxhomegoods.112.2o7.net^
 ||tjxilfchgxsrl.online^
@@ -2702327,6 +2702367,7 @@ zyvwtasyon.com
 ||tunjio.com^
 ||tunkaboomymal.cfd^
 ||tunkajumping.cyou^
+||tunkergiglot.cfd^
 ||tunketdocker.qpon^
 ||tunl.info^
 ||tunlr.info^
@@ -2707321,6 +2707362,7 @@ zyvwtasyon.com
 ||tweroijdfsklrepoywerjfreecom.com^
 ||twerp.szlftjcm.in^
 ||twerp.xyz^
+||twerpseyebeam.cyou^
 ||twerpuveitic.com^
 ||twerpz.info^
 ||twessy.tasawk.net^
@@ -2713345,6 +2713387,7 @@ zyvwtasyon.com
 ||uaifacil.com.br^
 ||uaiilmuujsu.com^
 ||uaildafeao.gq^
+||uaimgzstvfekb.space^
 ||uainexus.top^
 ||uaiowafphhb.com^
 ||uaipromobr.com^
@@ -2717071,6 +2717114,7 @@ zyvwtasyon.com
 ||uialtn.icu^
 ||uiam.uk^
 ||uiaokp.help^
+||uiapoozgbrnyy.site^
 ||uiarejusidosd.site^
 ||uiaxafua.xyz^
 ||uib.ff.avast.com^
@@ -2736554,6 +2736598,7 @@ zyvwtasyon.com
 ||uphostwebb.tk^
 ||uphot.net^
 ||uphsga.bar^
+||uphtenydsrbdt.space^
 ||uphuchaups.net^
 ||uphuld-io.zapier.app^
 ||uphurlultrabox.digital^
@@ -2762751,6 +2762796,7 @@ zyvwtasyon.com
 ||vbtrbulabutew.site^
 ||vbtrst.info^
 ||vbtrst.pro^
+||vbtshsllbrftg.space^
 ||vbtwegnwgvhpr.site^
 ||vbu.cc^
 ||vbualxx-notaronline1notaronline1notaronline1-notaronline1.click^
@@ -2814870,6 +2814916,7 @@ zyvwtasyon.com
 ||vxneczkffmaxkf.com^
 ||vxnejgcewmbuk.com^
 ||vxngo.com^
+||vxny6ekfoxuetllvegh3.rest^
 ||vxo-protect.co.in^
 ||vxoc-wending.com.cn^
 ||vxof-jindinghui.com.cn^
@@ -2888125,6 +2888172,7 @@ zyvwtasyon.com
 ||wvwopsdh.top^
 ||wvwr1.hitbox.com^
 ||wvwresmi-casino.vip^
+||wvwrnhzkpousf.online^
 ||wvwudcukgswu.com^
 ||wvwv-apple.com^
 ||wvwv-icloud.help^
@@ -2979791,6 +2979839,7 @@ zyvwtasyon.com
 ||xaguwy.thomas-muenz.ru^
 ||xagxrv.my^
 ||xahaqio.pro^
+||xahcwfogvpupa.site^
 ||xahdhwy.com^
 ||xahffs.com^
 ||xahmegecwlclw.space^
@@ -2999842,6 +2999891,7 @@ zyvwtasyon.com
 ||xyhjflxkhqchl.online^
 ||xyhojp.lacoste.com^
 ||xyhswz.com^
+||xyhwgmvvzarfw.site^
 ||xyiawbjnajcm.bid^
 ||xyicgmkbjemlh.website^
 ||xyijw.com^
@@ -3039651,6 +3039701,7 @@ zyvwtasyon.com
 ||zojo.online^
 ||zojthreads.shop^
 ||zojuf.ivycityco.com^
+||zojwwxndxltnd.website^
 ||zok.at^
 ||zok.casino^
 ||zoka.cc^
