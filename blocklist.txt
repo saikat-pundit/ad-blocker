@@ -3,7 +3,7 @@
 ::1 ip6-localhost ip6-loopback
 
 # DNS Blocklist - Auto-generated
-# Last Updated: 2026-10-18 16:58:28 IST
+# Last Updated: 2026-10-18 20:14:18 IST
 # ==============================================
 
 $csp=child-src
@@ -36005,7 +36005,7 @@ rankinglekarzy.pl###message-top-wrapper
 rankomat.pl##.rank-cookie-bar
 ranobes.top##.free-support-top
 rap-up.com,wellnessmama.com##.post-nav
-rapidsave.com##.alert.col-md-offset-2
+rapidsave.com##.alert.col-md-offset-2:has(a[href^="https://docmost.com/"])
 rapidssl.com,thawte.com###toolbar
 rapidtyping.com##.c-c
 rapool.de,softwarenetz.de###grayout
@@ -401068,6 +401068,7 @@ zyvwtasyon.com
 ||arginrendova.live^
 ||argirisangelopoulos.gr^
 ||argivebots.click^
+||arglesalicemitt.cyou^
 ||arglesmtn.com^
 ||arglingpistole.com^
 ||arglocationservices.shop^
@@ -551001,6 +551002,7 @@ zyvwtasyon.com
 ||bivvmhkimlqzq.store^
 ||bivvywhoot.top^
 ||biw123.com^
+||biw65m3cxu3crfuzo.cfd^
 ||biwa.online^
 ||biwakstern.com^
 ||biwaziva.digital^
@@ -832246,6 +832248,7 @@ zyvwtasyon.com
 ||cjwmbvacimi.com^
 ||cjwp.cdnhls.pro^
 ||cjwpinoranchfoods.shop^
+||cjwvyhvwyispv.website^
 ||cjwyzhzjwmzmf.site^
 ||cjx.casino^
 ||cjxdbmxtnqmy.com^
@@ -1016397,6 +1016400,7 @@ zyvwtasyon.com
 ||dchighschool.edu.bd^
 ||dchknoomjquk.com^
 ||dchky.info^
+||dchmfcewghsll.online^
 ||dchnguasrxubf.com^
 ||dchtoys.shop^
 ||dci.de^
@@ -1137277,6 +1137281,7 @@ zyvwtasyon.com
 ||dyrnl.xyz^
 ||dyrooakwuh.com^
 ||dyrpvq.top^
+||dyrqtxvwnkxxi.site^
 ||dyrs66.wixsite.com^
 ||dyrsok.vip^
 ||dyrwww.com^
@@ -1148513,6 +1148518,7 @@ zyvwtasyon.com
 ||ebobetgacor.top^
 ||ebocornac.com^
 ||eboehomeown.com^
+||eboglvqdtadmz.space^
 ||ebok-002894826.001300498498874582.com^
 ||ebok-pge014881.com^
 ||ebok-pl-047984265.com^
@@ -1264066,6 +1264072,7 @@ zyvwtasyon.com
 ||ffynnonwen.uk^
 ||ffyvsn.evisu.com^
 ||ffzljtcftssxn.space^
+||ffzlvipdtkska.space^
 ||ffzob.4moms.com^
 ||fg-8.casino^
 ||fg-dom.shop^
@@ -1295249,6 +1295256,7 @@ zyvwtasyon.com
 ||fntvloqdmf.com^
 ||fnual.brooksbrothers.com^
 ||fnudascend.com^
+||fnudeewhputcs.com^
 ||fnudpro.com^
 ||fnudy.top^
 ||fnuforex.co.cc^
@@ -1311445,6 +1311453,7 @@ zyvwtasyon.com
 ||fpiqxdyxxouwy.space^
 ||fpiu.com^
 ||fpivt.dometic.com^
+||fpiwyyjsdxpph.online^
 ||fpj.casino^
 ||fpjgdacsnviyc.site^
 ||fpjkarweguqyo.online^
@@ -1340125,6 +1340134,7 @@ zyvwtasyon.com
 ||fuiyfhiwcwerrqd.com^
 ||fuj.casino^
 ||fujairahfreezone.com^
+||fujbgprpchvlp.space^
 ||fujeigroup.com^
 ||fujfus.com^
 ||fujhop.work^
@@ -1353645,6 +1353655,7 @@ zyvwtasyon.com
 ||gac.mn^
 ||gac.server-queen.jp^
 ||gaca.xyz^
+||gacaihhbzgwlk.space^
 ||gacalmaritime.org^
 ||gacalvo.com^
 ||gacam67s.name^
@@ -1433473,6 +1433484,7 @@ zyvwtasyon.com
 ||goulan.xyz^
 ||goulanwattles.cfd^
 ||goulashbeam.digital^
+||goulashwifock.cyou^
 ||goulbap287evenost.com^
 ||goulburnfairtrade.com.au^
 ||gouldsdistributors.com^
@@ -1451798,6 +1451810,7 @@ zyvwtasyon.com
 ||grikucaumso.com^
 ||griland.ru^
 ||grilcasino.xyz^
+||grilhxufdvunu.website^
 ||grilime.com^
 ||grill-maxe-pattensen.de^
 ||grill-strops-clef.space^
@@ -1453202,6 +1453215,7 @@ zyvwtasyon.com
 ||grivix.shop^
 ||grivnix.net^
 ||grivo.com.br^
+||grivoisauncel.qpon^
 ||grivok.click^
 ||grivok.shop^
 ||grivoro.shop^
@@ -1470749,6 +1470763,7 @@ zyvwtasyon.com
 ||gwl7788.com^
 ||gwlane1.awiki.org^
 ||gwlhonuisy.com^
+||gwlhzzfzmkzxu.online^
 ||gwliqg.help^
 ||gwllsj.help^
 ||gwm.global^
@@ -1470890,6 +1470905,7 @@ zyvwtasyon.com
 ||gwyqupvtyqzy.in^
 ||gwywsuemmf.com^
 ||gwywwiscavk.com^
+||gwyztyahjamn.in^
 ||gwzzaa.mirtesen.ru^
 ||gx-bet.fr^
 ||gx-betcasino.com^
@@ -1514796,6 +1514812,7 @@ zyvwtasyon.com
 ||hgnew.tk^
 ||hgnftgngjegoghjegv.com^
 ||hgni.lietoto.sa.com^
+||hgnxbhzxgjnsc.website^
 ||hgo28a5v.com^
 ||hgo88.vip^
 ||hgo909-slot-gacor.com^
@@ -1527126,6 +1527143,7 @@ zyvwtasyon.com
 ||hjwang911.asia^
 ||hjwangb.hl.cn^
 ||hjwgwb.site^
+||hjwmppzycegil.space^
 ||hjwopemansw.com^
 ||hjwqvivxoymvw.site^
 ||hjwtvz.cc^
@@ -1589662,6 +1589680,7 @@ zyvwtasyon.com
 ||ijvfcn.singles^
 ||ijvkoreofxyslt.com^
 ||ijvolcqtnxohl.com^
+||ijvpzsijsvwih.online^
 ||ijwck.com^
 ||ijwedylvbjgdx.space^
 ||ijwhgp.pics^
@@ -1653874,6 +1653893,7 @@ zyvwtasyon.com
 ||jdknsghqwbrki.com^
 ||jdkpetwasteservices.com^
 ||jdkproxy.com^
+||jdkqovxtynzfd.online^
 ||jdks7a.sportmeals.com^
 ||jdkwtwtbiv.com^
 ||jdl3388.com^
@@ -1666620,6 +1666640,7 @@ zyvwtasyon.com
 ||jlyse.net^
 ||jlysss.cn^
 ||jlystyle.shop^
+||jlytgswydy.com^
 ||jlyvipaff.cc^
 ||jlyy.gekub.yi.org^
 ||jlzcgh.sbs^
@@ -1693417,6 +1693438,7 @@ zyvwtasyon.com
 ||k3d7np.cam^
 ||k3dns.com^
 ||k3dqv.ru^
+||k3eercnxnkin3ri88m7ewuurn98we3pfip878q.rest^
 ||k3etkzt.beer^
 ||k3ia7.careforskin.nl^
 ||k3ia7.doersoflondon.com^
@@ -1704012,6 +1704034,7 @@ zyvwtasyon.com
 ||keciorenharem41.click^
 ||keciorenkoltukyikama.net^
 ||keck-dingbosports.com.cn^
+||keckingslobdolor.qpon^
 ||kecklingdivisbbional.info^
 ||keckom.com^
 ||kecksdirect.shop^
@@ -1717657,6 +1717680,7 @@ zyvwtasyon.com
 ||kittask.com^
 ||kittbingo.com^
 ||kittcarsystem.com^
+||kittedkraft.com^
 ||kitteede.tk^
 ||kitten-swap.net^
 ||kitten-swap.org^
@@ -1731827,6 +1731851,7 @@ zyvwtasyon.com
 ||ktyrlotuyds.xyz^
 ||ktyrqg.com^
 ||ktz.casino^
+||ktzggmigkucmy.website^
 ||ktzgusbpnzt.com^
 ||ktzhas.cards^
 ||ktzhk.com^
@@ -1831542,6 +1831567,7 @@ zyvwtasyon.com
 ||lwfdlv.icu^
 ||lwfjd.today^
 ||lwfmc.voluumtrk.com^
+||lwfnfwgbkgryv.site^
 ||lwfpgvmd.com^
 ||lwfptv.sbs^
 ||lwfusuzek.sopohuyn.fastsize.ru^
@@ -1936496,6 +1936522,7 @@ zyvwtasyon.com
 ||mhzstaking.xyz^
 ||mhzstocks.xyz^
 ||mhzvqz.sbs^
+||mhzyawls.cfd^
 ||mhzyxh.com^
 ||mi-2503.0sakana.xyz^
 ||mi-analytics.marketindex.com.au^
@@ -1983677,6 +1983704,7 @@ zyvwtasyon.com
 ||monolog.online^
 ||monologuelondon.shop^
 ||monoloop.com^
+||monomerenjail.qpon^
 ||monomit.com^
 ||monomrrolecular.info^
 ||monon.com.bd^
@@ -1989048,6 +1989076,7 @@ zyvwtasyon.com
 ||mops.ostroda.pl^
 ||mops.zitronentour.de^
 ||mopsgear.shop^
+||mopsycoaita.cyou^
 ||moptaimpoo.net^
 ||mopub-dfp.mopub.com^
 ||mopub-east-bidder.manage.com^
@@ -2067577,6 +2067606,7 @@ zyvwtasyon.com
 ||nkkrmzsr.top^
 ||nkksj.nestedbean.com^
 ||nkktfeoicbx.bid^
+||nkkttacbpewwo.website^
 ||nkkuwf.online^
 ||nkkwr.meeturlove.com^
 ||nkkxgqdgnpunnr.bid^
@@ -2096936,6 +2096966,7 @@ zyvwtasyon.com
 ||obynphnd.courses^
 ||obyory.com^
 ||obysaccountingsolutions.com^
+||obysbqrqxdgnz.online^
 ||obyty.pl^
 ||obywvm.com.cn^
 ||obyxbkckwmplk.com^
@@ -2141274,6 +2141305,7 @@ zyvwtasyon.com
 ||orsrents.com^
 ||orstudnp.com^
 ||orstumblethis.info^
+||orsvunkydjxsq.site^
 ||orszajhynaqr.com^
 ||ort-stsdk.vivo.com.cn^
 ||ort-stsdk.vivoglobal.com^
@@ -2336198,6 +2336230,7 @@ zyvwtasyon.com
 ||qqyxygag.shop^
 ||qqyy.hl.cn^
 ||qqyyc.com^
+||qqzarzuheqxin.online^
 ||qqzb88.com^
 ||qqzemhhj.shop^
 ||qqzetk.shop^
@@ -2415097,6 +2415130,7 @@ zyvwtasyon.com
 ||reyplaycasino.com^
 ||reyplaycasino.net^
 ||reypremium.com^
+||reyqzwgcxdcdh.website^
 ||reyselect.shop^
 ||reyservices.site^
 ||reysur-casino-ar.com^
@@ -2445138,6 +2445172,7 @@ zyvwtasyon.com
 ||roikforex.co.cc^
 ||roikgelvora.info^
 ||roikingdom.com^
+||roildauted.qpon^
 ||roiliernoqgxdj.download^
 ||roilierservet.qpon^
 ||roiliest-honks.000webhostapp.com^
@@ -2590292,6 +2590327,7 @@ zyvwtasyon.com
 ||smikta.info^
 ||smil.online^
 ||smil.shop^
+||smilaxpinnersgraying.cfd^
 ||smildner.de^
 ||smile-adv.com^
 ||smile-angel.com^
@@ -2595652,6 +2595688,7 @@ zyvwtasyon.com
 ||sneaxsmm.com^
 ||sneazm.de^
 ||snecksinter.com^
+||sneddedlately.cfd^
 ||snedkerconcepts.com.au^
 ||snee.info^
 ||sneed.social^
@@ -2744090,6 +2744127,7 @@ zyvwtasyon.com
 ||szapf.com^
 ||szapple2003.com^
 ||szasosco.shop^
+||szatemxctwmgl.site^
 ||szatlj.com^
 ||szaton.com.pl^
 ||szavprofitnk.live^
@@ -2788709,6 +2788747,7 @@ zyvwtasyon.com
 ||thasaubourowesh.com^
 ||thaseelkalba.com^
 ||thashila.click^
+||thasiandowl.qpon^
 ||thasianhyenine.com^
 ||thasiankelkcunan.cyou^
 ||thassos.clicknplay.to^
@@ -2839616,6 +2839655,7 @@ zyvwtasyon.com
 ||toushia.net^
 ||toushibao.com^
 ||tousho.online^
+||tousingazotous.qpon^
 ||tousleoutbid.com^
 ||tousnl.net^
 ||toussaintrealestateservices.com^
@@ -2909445,6 +2909485,7 @@ zyvwtasyon.com
 ||undian01.my.id^
 ||undiantogel.com^
 ||undibis.org^
+||undidembargo.com^
 ||undiesthumb.com^
 ||undighh.cyou^
 ||undigitalatelierkids.shop^
@@ -2997988,6 +2998029,7 @@ zyvwtasyon.com
 ||vqwwm.top^
 ||vqx.casino^
 ||vqxdpcwnxyc.com^
+||vqxeiptrvjred.site^
 ||vqxlbd.billyreid.com^
 ||vqxmeseasarc.com^
 ||vqxppnlrcbxlh.site^
@@ -3079773,6 +3079815,7 @@ zyvwtasyon.com
 ||wtraff.com^
 ||wtrajutnmkgoxfdyhqcw.com^
 ||wtrbound.shop^
+||wtrbrchrbymlo.website^
 ||wtreqnine.com^
 ||wtrevvit.com^
 ||wtrf.org^
@@ -3219414,6 +3219457,7 @@ zyvwtasyon.com
 ||yvsymvjzk.com^
 ||yvsystem.com^
 ||yvtcdb.sbs^
+||yvtcwrcvkwacm.website^
 ||yvtgva.casa.it^
 ||yvu.cc^
 ||yvufek.onl^
@@ -3224853,6 +3224897,7 @@ zyvwtasyon.com
 ||zcyclbncgubccl.com^
 ||zcylny.com^
 ||zcymvyglyjyxu.online^
+||zcyqxsvquhmwq.website^
 ||zcyuixx-stodiplomovstodiplomovstodiplomovstod-stodiplomov.click^
 ||zcz.casino^
 ||zczbfree.com^
